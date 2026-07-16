@@ -658,17 +658,31 @@
             <div style="background: #ece9d8; padding: 5px 10px; border-bottom: 1px solid #d6d3c2; display: flex; gap: 15px; align-items: center;">
                 <button type="submit" form="xp-contact-form" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;">
                     <span style="font-size: 1.2rem;">✉</span>
-                    <span style="font-size: 0.7rem; color: #000; font-family: Tahoma, sans-serif; font-weight: bold;">Send</span>
+                    <span id="send-btn-text" style="font-size: 0.7rem; color: #000; font-family: Tahoma, sans-serif; font-weight: bold;">Send</span>
                 </button>
                 <div style="width: 1px; height: 25px; background: #b5b2a1;"></div>
                 <div style="font-size: 0.75rem; color: #555; font-family: Tahoma, sans-serif;">To: riccardo_sys_admin@808s.net</div>
             </div>
 
-            <div class="window-body" style="background: #ffffff; color: #000000; padding: 15px;">
-                <!-- FORM DI CONTATTO (Puntato a Formspree) -->
+            <div class="window-body" style="background: #ffffff; color: #000000; padding: 15px; position: relative;">
+                
+                <!-- POP-UP DI CONFERMA INVIO (Invisibile di default, stile Windows XP Alert) -->
+                <div id="xp-alert-box" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; background: #ece9d8; border: 3px solid #0053e1; border-radius: 4px; box-shadow: 5px 5px 15px rgba(0,0,0,0.5); z-index: 100; font-family: Tahoma, sans-serif; padding: 2px;">
+                    <div style="background: linear-gradient(90deg, #166aee 0%, #0053e1 100%); color: #fff; font-weight: bold; font-size: 0.75rem; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <span>System Message</span>
+                        <span style="cursor: pointer; font-weight: bold;" onclick="closeXpAlert()">X</span>
+                    </div>
+                    <div style="padding: 15px; background: #fff; font-size: 0.8rem; color: #000; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.8rem; color: #0053e1;">ℹ</span>
+                        <span>Your analog message has been transmitted successfully!</span>
+                    </div>
+                    <div style="background: #ece9d8; padding: 8px; display: flex; justify-content: flex-end; border-top: 1px solid #d6d3c2;">
+                        <button onclick="closeXpAlert()" style="background: #ece9d8; border: 1px solid #716f64; padding: 4px 15px; font-size: 0.75rem; box-shadow: inset -1px -1px 1px #888, inset 1px 1px 1px #fff; cursor: pointer; outline: none;">OK</button>
+                    </div>
+                </div>
+
+                <!-- FORM DI CONTATTO -->
                 <form id="xp-contact-form" action="https://formspree.io/f/mpqvqvdk" method="POST" style="display: flex; flex-direction: column; gap: 12px; font-family: Tahoma, sans-serif;">
-                    
-                    <!-- Campi visibili all'utente (NON hanno l'attributo 'name' nativo, per evitare che Formspree li legga direttamente e si confonda) -->
                     
                     <!-- Campo Nome (Opzionale) -->
                     <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
@@ -691,21 +705,20 @@
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Area di Testo Messaggio scritto dall'utente -->
+                    <!-- Area di Testo Messaggio -->
                     <div style="margin-top: 10px;">
                         <textarea id="user-message" required placeholder="Type your analog message here..." style="width: 100%; min-height: 120px; border: 1px solid #b5b2a1; padding: 10px; font-size: 0.9rem; outline: none; resize: vertical; font-family: 'Share Tech Mono', monospace; background-color: #fafafa; color: #111;"></textarea>
                     </div>
 
-                    <!-- CAMPI NASCOSTI STANDARD (Quelli che Formspree leggerà davvero, sempre compilati e sicuri al 100%) -->
+                    <!-- CAMPI NASCOSTI STANDARD (Quelli inviati a Formspree) -->
                     <input type="hidden" name="name" id="fs-static-name" value="RICCARDO_OS_USER">
                     <input type="hidden" name="email" id="fs-static-email" value="noreply@riccardophys.github.io">
                     <input type="hidden" name="_subject" id="fs-static-subject" value="[RICCARDO_OS] New Form Submission">
-                    <!-- Questo conterrà l'intero testo formattato -->
                     <input type="hidden" name="message" id="fs-final-message">
 
                     <!-- Bottone per Mobile -->
                     <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
-                        <button type="submit" style="background: linear-gradient(180deg, #0053e1 0%, #003db8 100%); color: white; border: 1px solid #002c9a; padding: 6px 20px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
+                        <button type="submit" id="mobile-send-btn" style="background: linear-gradient(180deg, #0053e1 0%, #003db8 100%); color: white; border: 1px solid #002c9a; padding: 6px 20px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
                             Send Message
                         </button>
                     </div>
@@ -713,16 +726,28 @@
             </div>
         </div>
 
-        <!-- SCRIPT DI TRASFORMAZIONE E IMPACCHETTAMENTO DATI -->
+        <!-- SCRIPT DI INVIO MODULO ASINCRONO (ZERO REDIRECT) -->
         <script>
-            document.getElementById('xp-contact-form').addEventListener('submit', function(e) {
-                // Recuperiamo i dati compilati dall'utente
+            const contactForm = document.getElementById('xp-contact-form');
+            const alertBox = document.getElementById('xp-alert-box');
+            const sendBtnText = document.getElementById('send-btn-text');
+            const mobileSendBtn = document.getElementById('mobile-send-btn');
+
+            contactForm.addEventListener('submit', function(e) {
+                // 1. Impediamo l'invio classico del browser (niente ricarica della pagina!)
+                e.preventDefault();
+
+                // Cambia il testo dei pulsanti per mostrare che sta caricando
+                sendBtnText.textContent = "Sending...";
+                mobileSendBtn.textContent = "Sending...";
+                mobileSendBtn.disabled = true;
+
+                // 2. Recuperiamo e formattiamo i dati visibili dell'utente
                 const uName = document.getElementById('user-name').value.trim() || "Anonymous";
                 const uEmail = document.getElementById('user-email').value.trim() || "Not Provided";
                 const uSubject = document.getElementById('user-subject').value.trim() || "No Subject";
                 const uMessage = document.getElementById('user-message').value;
 
-                // Creiamo il super-messaggio unificato e formattato da hacker anni 2000
                 const formattedMessage = `====================================
 [RICCARDO_OS - INCOMING TRANSMISSION]
 ====================================
@@ -734,23 +759,46 @@ MESSAGE:
 ${uMessage}
 ====================================`;
 
-                // Inseriamo questo mega testo nel campo nascosto che Formspree riceverà
+                // Inseriamo il messaggio unificato nel campo nascosto
                 document.getElementById('fs-final-message').value = formattedMessage;
-            });
-        </script>
 
-    <!-- FOOTER: RETRO SYSTEM COPYRIGHT & SPECS -->
-        <footer style="grid-column: 1 / -1; margin-top: 25px; padding: 20px 10px; text-align: center; border-top: 1px dashed rgba(0, 255, 204, 0.2); font-size: 0.75rem; color: #8899a6; display: flex; flex-direction: column; gap: 8px;">
-            <div>
-                © '04 <strong>RICCARDO_SYS_ADMIN</strong>. ALL RIGHTS RESERVED.
-            </div>
-            <div style="font-size: 0.7rem; color: #4a5568; letter-spacing: 1px;">
-                greetings from RICCARDO // SYSTEM OPERATIVE: Windows_XP v1.2 // TR-808 EMULATION CHIP ACTIVE
-            </div>
-            <div style="font-size: 0.65rem; color: #ff3366;">
-                [!] WARNING: Unauthorized access to 808s frequencies will trigger emotional output errors.
-            </div>
-        </footer>
+                // 3. Prepariamo i dati per l'invio asincrono
+                const formData = new FormData(contactForm);
+
+                // 4. Inviamo i dati a Formspree in background (AJAX via fetch)
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Successo! Mostriamo il popup di Windows XP
+                        alertBox.style.display = 'block';
+                        contactForm.reset(); // Svuota i campi per un nuovo messaggio
+                    } else {
+                        alert("System Error: Could not deliver message to Riccardo.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Network Connection Lost. Try again.");
+                })
+                .finally(() => {
+                    // Ripristiniamo lo stato dei pulsanti di invio
+                    sendBtnText.textContent = "Send";
+                    mobileSendBtn.textContent = "Send Message";
+                    mobileSendBtn.disabled = false;
+                });
+            });
+
+            // Funzione per chiudere il popup di notifica XP
+            function closeXpAlert() {
+                alertBox.style.display = 'none';
+            }
+        </script>
 
 
    <!-- LOGICA IPHONE 4 SIMULATOR -->
