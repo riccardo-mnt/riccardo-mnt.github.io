@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>808s // RICCARDO_OS_v1.2</title>
+    <title>808s // R_OS_v1.2</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -373,7 +373,7 @@
 
         <!-- HEADER STILE PSP (XMB) -->
         <header>
-            <div class="psp-logo">★ SONY_PSP_XMB // [RICCARDO_OS]</div>
+            <div class="psp-logo">★ // [RICCARDO]</div>
             <ul class="psp-menu">
                 <li class="psp-item active">■ HOME</li>
                 <li class="psp-item">▲ MUSIC</li>
@@ -382,13 +382,13 @@
             </ul>
             <div class="psp-status">
                 <span>[Memory Stick Pro Duo]</span>
-                <span>⚡ 100%</span>
+                <span>⚡ 7%</span>
             </div>
         </header>
 
         <!-- XBOX 360 BLADES DASHBOARD NAV -->
         <div class="xbox-blades-nav">
-            <div class="blade active">Xbox Live</div>
+            <div class="blade active">Live</div>
             <div class="blade blade-xbox-green">Riccardo</div>
             <div class="blade">Media</div>
             <div class="blade">System</div>
@@ -397,7 +397,7 @@
         <!-- WINDOW 1: IL LETTORE MP3 / MEDIA PLAYER -->
         <div class="window">
             <div class="window-header">
-                <span>Xbox_360_Media_Center.xex</span>
+                <span>360_Media_Center.xex</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -408,20 +408,20 @@
                 <div class="mp3-player">
                     <div class="lcd-screen">
                         <div class="track-info">
-                            <span>TRACK: 04_HEARTLESS.wav</span>
+                            <span>TRACK: 01_Say_You_Will.wav</span>
                             <span>96 kbps</span>
                         </div>
                         <div class="track-info">
-                            <span class="glow-text">PLAYING >> SYNCING_HEART</span>
+                            <span class="glow-text">PLAYING >> </span>
                             <span>[02:14 / 03:31]</span>
                         </div>
                         <img src="https://c.tenor.com/p2w1siLrDksAAAAC/tenor.gif" class="heart-wave" alt="Heart Waveform">
                     </div>
                     
                     <div class="mp3-controls">
-                        <button class="mp3-btn" onclick="alert('REPLAY ACTIVE')">■</button>
-                        <button class="mp3-btn" onclick="alert('XBOX_360_GUIDE_DASH')">▶</button>
-                        <button class="mp3-btn" onclick="alert('MUTE')">||</button>
+                        <button class="mp3-btn" onclick="alert('Ciaoooo')">■</button>
+                        <button class="mp3-btn" onclick="alert('Who ordered that?')">▶</button>
+                        <button class="mp3-btn" onclick="alert('We fall apart as it gets dark')">||</button>
                     </div>
                 </div>
             </div>
@@ -430,7 +430,7 @@
         <!-- WINDOW 2: FILE SYSTEM & CONSOLE LOG -->
         <div class="window">
             <div class="window-header">
-                <span>riccardo_system_log.txt</span>
+                <span>system_log.txt</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -443,9 +443,9 @@
                     <div class="sys-line">>> SYSTEM: <span style="color: #107c10;">XBOX_360_KERNEL_v2.0.1888.0</span></div>
                     <div class="sys-line">>> STORAGE_DEVICE: <span style="color: #00ff66;">PSP_MEMORY_STICK_16GB</span></div>
                     <div class="sys-line">>> AUDIO_ENGINE: Roland TR-808 Emulator Active</div>
-                    <div class="sys-line">>> DEPLOYMENT_HOST: github.io/808s-and-heartclick/</div>
+                    <div class="sys-line">>> DEPLOYMENT_HOST: github.io/</div>
                     <div class="sys-line" style="font-size: 0.7rem; color: #718096; margin-top: 5px;">
-                        "Anni 2000 hardware simulation. Keep the bass loud."
+                        "2000s hardware simulation. Just evening the odds."
                     </div>
                 </div>
             </div>
@@ -469,7 +469,7 @@
             </div>
         </div>
 
-        <!-- WINDOW 4: NUOVA FOTO 2 (RUOTATA ANTICLOCKWISE) -->
+       <!-- WINDOW 4: NUOVA FOTO 2 (RUOTATA ANTICLOCKWISE) -->
         <div class="window">
             <div class="window-header">
                 <span>rotated_polaroid.png</span>
@@ -479,19 +479,22 @@
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body">
-                <div class="image-container" style="background: #050505;">
-                    <!-- Immagine ruotata di 90 gradi in senso antiorario -->
-                    <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" class="y2k-img rotated-img" alt="Rotated Portrait">
-                    <div class="caption" style="margin-top: 15px;">ID: ROTATED_AESTHETIC_90deg // BYPASS: VERTICAL_LIMITS</div>
+            <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 300px; background: #050505;">
+                <!-- Wrapper per gestire la rotazione senza rompere il layout -->
+                <div class="image-container" style="border: none; background: transparent; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center; overflow: visible;">
+                    <!-- L'immagine viene ruotata e scalata per riempire il box -->
+                    <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
+                         style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.3); border-radius: 4px; transition: filter 0.3s;" 
+                         alt="Rotated Portrait">
                 </div>
+                <div class="caption" style="margin-top: 15px; z-index: 10;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
             </div>
         </div>
 
-        <!-- WINDOW 5: LA TUA FOTO PERSONALE DEL 2004 -->
-        <div class="window" style="grid-column: 1 / -1;">
+       <!-- WINDOW 5: LA TUA FOTO PERSONALE DEL 2004 (Ora pulita e isolata) -->
+        <div class="window">
             <div class="window-header">
-                <span>riccardo_archive_2004_snapshot.dat</span>
+                <span>riccardo_archive_2004.dat</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -500,16 +503,38 @@
             </div>
             <div class="window-body">
                 <div class="image-container">
-                    <!-- FOTO DEL 2004: Inserisci il link della tua foto nel src qui sotto -->
-                    <img src="https://drive.google.com/u/0/drive-viewer/AKGpihaDNQDLWwFvJka5ZXcH2a2MT-UfDLVNF8cesWMFIRmjXpcHJrbsp-RLcLaoiPAotJIWykAHEFoQE27VgcTgnZnsc6qXbfHUhFo=s1600-rw-v1?auditContext=forDisplay" class="y2k-img" style="max-height: 350px; object-fit: contain;" alt="Riccardo 2004 Snapshot" onerror="this.src='https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png'; this.style.opacity='0.4';">
+                    <!-- Puntiamo direttamente al file caricato su GitHub per evitare i blocchi di Google Drive -->
+                    <img src="riccardo_2004.jpg" class="y2k-img" style="max-height: 250px; object-fit: contain;" alt="Riccardo 2004 Snapshot" onerror="this.style.display='none'; alert('Carica la tua foto riccardo_2004.jpg nella repository GitHub per vederla qui!');">
                     <div class="caption">
-                        <strong>DATA_RECOVERY_STATUS:</strong> 100% RECOVERED // <strong>HARDWARE:</strong> RETRO_CHIP_2004 // <strong>LOCATION:</strong> HOME_PC_BACKUP_DISK
-                        <p style="margin-top: 5px; font-size: 0.75rem; color: #ff3366;">[!] Ricordo analogico archiviato con successo nel file system di Riccardo.</p>
+                        <strong>DATA_RECOVERY_STATUS:</strong> 100% RECOVERED // <strong>HARDWARE:</strong> RETRO_CHIP_2004
+                        <p style="margin-top: 5px; font-size: 0.75rem; color: #ff3366;">[!] Analogic Memory: successfully archiviated.</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- WINDOW 6: NUOVO BOX DEDICATO A KANYE / YEEZY -->
+        <div class="window">
+            <div class="window-header">
+                <span>yeezy_sound_generator_concept.png</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="image-container">
+                    <img src="https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png" class="y2k-img" alt="Kanye West Jeen-Yuhs">
+                    <div class="caption">
+                        <strong>YEEZY_PROTOTYPE_v0.808</strong>
+                        <p style="margin-top: 5px; font-size: 0.72rem; color: #00ffcc; text-transform: uppercase;">
+                            Engineered by Ye. Cruel winter frequencies detected. Auto-Tune architecture initialized.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
