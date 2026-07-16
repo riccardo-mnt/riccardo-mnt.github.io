@@ -726,7 +726,7 @@
             </div>
         </div>
 
-        <!-- SCRIPT DI INVIO MODULO ASINCRONO (ZERO REDIRECT) -->
+       <!-- SCRIPT DI INVIO MODULO ASINCRONO CON METADI -->
         <script>
             const contactForm = document.getElementById('xp-contact-form');
             const alertBox = document.getElementById('xp-alert-box');
@@ -734,20 +734,27 @@
             const mobileSendBtn = document.getElementById('mobile-send-btn');
 
             contactForm.addEventListener('submit', function(e) {
-                // 1. Impediamo l'invio classico del browser (niente ricarica della pagina!)
                 e.preventDefault();
 
-                // Cambia il testo dei pulsanti per mostrare che sta caricando
                 sendBtnText.textContent = "Sending...";
                 mobileSendBtn.textContent = "Sending...";
                 mobileSendBtn.disabled = true;
 
-                // 2. Recuperiamo e formattiamo i dati visibili dell'utente
+                // 1. Recuperiamo i dati inseriti manualmente dall'utente
                 const uName = document.getElementById('user-name').value.trim() || "Anonymous";
                 const uEmail = document.getElementById('user-email').value.trim() || "Not Provided";
                 const uSubject = document.getElementById('user-subject').value.trim() || "No Subject";
                 const uMessage = document.getElementById('user-message').value;
 
+                // 2. DATI DI SISTEMA 
+                const userAgent = navigator.userAgent; // Browser e OS
+                const screenResolution = `${window.screen.width}x${window.screen.height}`; // Risoluzione Schermo
+                const windowSize = `${window.innerWidth}x${window.innerHeight}`; // Dimensione Finestra Browser
+                const userLanguage = navigator.language || navigator.userLanguage; // Lingua del sistema
+                const userDateTime = new Date().toLocaleString(); // Data e ora locale dell'utente
+                const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Fuso orario (es. Europe/Rome)
+
+                // 3. Creiamo il super-messaggio unificato con i metadati 
                 const formattedMessage = `====================================
 [RICCARDO_OS - INCOMING TRANSMISSION]
 ====================================
@@ -757,15 +764,22 @@ SUBJECT: ${uSubject}
 ------------------------------------
 MESSAGE:
 ${uMessage}
+
+====================================
+[VISITOR_METADATA - SYSTEM_LOG]
+====================================
+TIMESTAMP:   ${userDateTime}
+TIMEZONE:    ${userTimezone}
+OS/BROWSER:  ${userAgent}
+SCREEN_RES:  ${screenResolution} (Window: ${windowSize})
+LANG:        ${userLanguage}
 ====================================`;
 
-                // Inseriamo il messaggio unificato nel campo nascosto
+                // Inseriamo il messaggio formattato nel campo nascosto per Formspree
                 document.getElementById('fs-final-message').value = formattedMessage;
 
-                // 3. Prepariamo i dati per l'invio asincrono
                 const formData = new FormData(contactForm);
 
-                // 4. Inviamo i dati a Formspree in background (AJAX via fetch)
                 fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
@@ -775,9 +789,8 @@ ${uMessage}
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Successo! Mostriamo il popup di Windows XP
                         alertBox.style.display = 'block';
-                        contactForm.reset(); // Svuota i campi per un nuovo messaggio
+                        contactForm.reset();
                     } else {
                         alert("System Error: Could not deliver message to Riccardo.");
                     }
@@ -787,14 +800,12 @@ ${uMessage}
                     alert("Network Connection Lost. Try again.");
                 })
                 .finally(() => {
-                    // Ripristiniamo lo stato dei pulsanti di invio
                     sendBtnText.textContent = "Send";
                     mobileSendBtn.textContent = "Send Message";
                     mobileSendBtn.disabled = false;
                 });
             });
 
-            // Funzione per chiudere il popup di notifica XP
             function closeXpAlert() {
                 alertBox.style.display = 'none';
             }
