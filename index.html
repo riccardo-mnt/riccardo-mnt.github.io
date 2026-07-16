@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>808s // SYSTEM_v1.0</title>
+    <title>808s // RICCARDO_OS_v1.2</title>
     <style>
-        /* Sfondi e Font Retro-Futuristi */
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
         * {
@@ -17,19 +16,19 @@
         }
 
         body {
-            background-color: #0c0d12;
+            background-color: #0b0c10;
             background-image: 
-                radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 70%),
-                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+                radial-gradient(circle, rgba(255, 51, 102, 0.12) 0%, transparent 80%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
             background-size: 100% 100%, 100% 4px, 6px 100%;
             color: #00ffcc;
             overflow-x: hidden;
-            padding: 10px; /* Ridotto per schermi piccoli */
+            padding: 10px;
             min-height: 100vh;
         }
 
-        /* Scanline Effect (Anni 2000 CRT) */
+        /* Scanline CRT */
         body::before {
             content: " ";
             display: block;
@@ -41,27 +40,26 @@
             pointer-events: none;
         }
 
-        /* Griglia Desktop Responsive */
         .desktop {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            padding-bottom: 30px;
+            padding-bottom: 40px;
         }
 
-        /* HEADER STILE PSP (Cross Media Bar) */
+        /* HEADER STILE SONY PSP (XMB) */
         header {
             grid-column: 1 / -1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid #334455;
-            border-radius: 8px;
-            padding: 10px 15px;
+            background: rgba(15, 18, 25, 0.85);
+            border: 2px solid #2d3748;
+            border-radius: 6px;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: inset 0 0 10px rgba(0,255,204,0.1);
+            box-shadow: inset 0 0 12px rgba(0,255,204,0.15);
             margin-bottom: 10px;
         }
 
@@ -69,6 +67,7 @@
             font-weight: bold; 
             color: #ff3366;
             font-size: 0.95rem;
+            text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
         }
 
         .psp-menu {
@@ -85,35 +84,74 @@
         }
 
         .psp-item.active, .psp-item:hover {
-            color: #ff3366;
-            text-shadow: 0 0 8px #ff3366;
+            color: #00ffcc;
+            text-shadow: 0 0 8px #00ffcc;
         }
 
-        #clock {
+        .psp-status {
             font-size: 0.8rem;
-            color: #8899a6;
+            color: #a0aec0;
+            display: flex;
+            gap: 10px;
         }
 
-        /* FINESTRE STILE WINDOWS MEDIA PLAYER / WINAMP */
+        /* XBOX 360 BLADES CONTAINER (Le linguette iconiche) */
+        .xbox-blades-nav {
+            grid-column: 1 / -1;
+            display: flex;
+            background: #12151c;
+            border: 2px solid #313b4d;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+            padding-left: 10px;
+        }
+
+        .blade {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #718096;
+            background: linear-gradient(180deg, #1d222e 0%, #151821 100%);
+            border-right: 2px solid #2d3748;
+            cursor: pointer;
+            text-transform: uppercase;
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%); /* Taglio obliquo stile X360 Blades */
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .blade.active {
+            color: #fff;
+            background: linear-gradient(180deg, #ff3366 0%, #cc0044 100%);
+            text-shadow: 0 0 5px rgba(255,255,255,0.8);
+            border-right-color: #ff3366;
+        }
+
+        .blade-xbox-green.active {
+            background: linear-gradient(180deg, #107c10 0%, #0c5a0c 100%);
+            border-right-color: #107c10;
+        }
+
+        /* FINESTRE DI SISTEMA OS */
         .window {
-            background: linear-gradient(180deg, #1e222b 0%, #111318 100%);
-            border: 3px solid #3d4659;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+            background: linear-gradient(180deg, #161a22 0%, #0d1015 100%);
+            border: 3px solid #353f52;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             width: 100%;
         }
 
-        /* Barra del Titolo Metallica */
         .window-header {
-            background: linear-gradient(90deg, #2b303c 0%, #48536a 100%);
+            background: linear-gradient(90deg, #232a37 0%, #3a455a 100%);
             padding: 8px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #1a1d24;
+            border-bottom: 2px solid #0d1015;
             font-weight: bold;
             font-size: 0.8rem;
             color: #e2e8f0;
@@ -140,20 +178,20 @@
             flex-grow: 1;
         }
 
-        /* PLAYER MP3 STILE ANNI 2000 */
+        /* LETTORE MP3 / XBOX MEDIA DASH */
         .mp3-player {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #15181f;
+            background: #11141a;
             border-radius: 8px;
             padding: 12px;
-            border: 1px solid #2d3345;
+            border: 1px solid #232a37;
         }
 
         .lcd-screen {
-            background-color: #0d1e1c;
-            border: 2px solid #1a2f2b;
+            background-color: #081412;
+            border: 2px solid #142824;
             border-radius: 4px;
             width: 100%;
             padding: 10px;
@@ -163,13 +201,15 @@
             box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .lcd-screen::after {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(transparent 50%, rgba(0,0,0,0.3) 50%);
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.2) 50%);
             background-size: 100% 4px;
             pointer-events: none;
         }
@@ -180,14 +220,15 @@
             margin-bottom: 5px;
         }
 
-        /* GIF del battito cardiaco dentro l'LCD */
         .heart-wave {
             width: 100%;
-            height: 50px;
-            object-fit: cover;
-            border: 1px solid #1a2f2b;
-            margin-top: 5px;
+            max-width: 160px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            margin: 8px auto 0 auto;
+            border: 1px solid #142824;
             filter: hue-rotate(60deg) saturate(1.5);
+            display: block;
         }
 
         .mp3-controls {
@@ -197,8 +238,8 @@
         }
 
         .mp3-btn {
-            background: linear-gradient(180deg, #3d4659 0%, #222733 100%);
-            border: 2px solid #4f5b74;
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+            border: 2px solid #4a5568;
             color: #a0aec0;
             border-radius: 50%;
             width: 38px;
@@ -212,39 +253,52 @@
         }
 
         .mp3-btn:active {
-            background: #111318;
+            background: #0d1015;
             border-color: #ff3366;
             color: #ff3366;
             transform: translateY(1px);
         }
 
-        /* GALLERIA IMMAGINI STYLE PORTFOLIO Y2K */
+        /* GALLERIA IMMAGINI Y2K */
         .image-container {
-            border: 1px solid #334455;
+            border: 1px solid #2d3748;
             background: #000;
             padding: 4px;
             border-radius: 6px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .y2k-img {
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 9; /* Mantiene le proporzioni corrette senza tagliare */
+            aspect-ratio: 16 / 9;
             object-fit: cover;
             display: block;
             border-radius: 4px;
             transition: filter 0.3s;
         }
 
-        /* Fix per la seconda immagine che è verticale/quadrata */
+        /* Foto 2 Ruotata di 90 gradi in senso antiorario */
+        .rotated-img {
+            transform: rotate(-90deg);
+            transform-origin: center;
+            max-height: 250px;
+            width: auto;
+            aspect-ratio: auto;
+            margin: 30px 0; /* Spazio per evitare sovrapposizioni post-rotazione */
+        }
+
         .heart-img {
             aspect-ratio: 1 / 1;
         }
 
         .y2k-img:hover {
-            filter: contrast(1.2) brightness(1.1) saturate(1.3);
+            filter: contrast(1.1) brightness(1.05) saturate(1.2);
         }
 
         .caption {
@@ -253,9 +307,10 @@
             margin-top: 5px;
             text-transform: uppercase;
             text-align: center;
+            width: 100%;
         }
 
-        /* FILE SYSTEM NERD PANEL */
+        /* CONSOLE LOG PERSONALIZZATO (RICCARDO_OS) */
         .sys-log {
             font-size: 0.75rem;
             color: #9f7aea;
@@ -267,7 +322,7 @@
         .sys-line {
             border-bottom: 1px dashed rgba(159, 122, 234, 0.2);
             padding: 3px 0;
-            word-break: break-all; /* Evita che scritte lunghe rompano il layout su mobile */
+            word-break: break-all;
         }
 
         .glow-text {
@@ -275,14 +330,14 @@
             text-shadow: 0 0 8px rgba(255, 51, 102, 0.6);
         }
 
-        /* MEDIA QUERIES PER ADATTAMENTO MOBILE (IPHONE/SMARTPHONE) */
+        /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
             body {
                 padding: 8px;
             }
 
             .desktop {
-                grid-template-columns: 1fr; /* Una sola colonna per schermi piccoli */
+                grid-template-columns: 1fr;
                 gap: 12px;
             }
 
@@ -302,8 +357,12 @@
                 font-size: 0.75rem;
             }
 
-            #clock {
-                display: none; /* Nascondiamo l'orologio su mobile per pulire l'interfaccia */
+            .psp-status {
+                font-size: 0.7rem;
+            }
+
+            .rotated-img {
+                max-height: 200px;
             }
         }
     </style>
@@ -312,22 +371,33 @@
 
     <div class="desktop">
 
-        <!-- HEADER (PSP XMB VIBES) -->
+        <!-- HEADER STILE PSP (XMB) -->
         <header>
-            <div class="psp-logo">[ 808s_NET_v1.0 ]</div>
+            <div class="psp-logo">★ SONY_PSP_XMB // [RICCARDO_OS]</div>
             <ul class="psp-menu">
-                <li class="psp-item active">□ SYSTEM</li>
-                <li class="psp-item">△ AUDIO</li>
-                <li class="psp-item">○ FILES</li>
-                <li class="psp-item">☓ EXIT</li>
+                <li class="psp-item active">■ HOME</li>
+                <li class="psp-item">▲ MUSIC</li>
+                <li class="psp-item">● PHOTOS</li>
+                <li class="psp-item">✖ SETTINGS</li>
             </ul>
-            <div id="clock">12:00:00</div>
+            <div class="psp-status">
+                <span>[Memory Stick Pro Duo]</span>
+                <span>⚡ 100%</span>
+            </div>
         </header>
+
+        <!-- XBOX 360 BLADES DASHBOARD NAV -->
+        <div class="xbox-blades-nav">
+            <div class="blade active">Xbox Live</div>
+            <div class="blade blade-xbox-green">Riccardo</div>
+            <div class="blade">Media</div>
+            <div class="blade">System</div>
+        </div>
 
         <!-- WINDOW 1: IL LETTORE MP3 / MEDIA PLAYER -->
         <div class="window">
             <div class="window-header">
-                <span>808s_MEDIA_PLAYER.exe</span>
+                <span>Xbox_360_Media_Center.xex</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -350,7 +420,7 @@
                     
                     <div class="mp3-controls">
                         <button class="mp3-btn" onclick="alert('REPLAY ACTIVE')">■</button>
-                        <button class="mp3-btn" onclick="alert('SYNCHRONIZING AUDIO DRIVERS')">▶</button>
+                        <button class="mp3-btn" onclick="alert('XBOX_360_GUIDE_DASH')">▶</button>
                         <button class="mp3-btn" onclick="alert('MUTE')">||</button>
                     </div>
                 </div>
@@ -360,7 +430,7 @@
         <!-- WINDOW 2: FILE SYSTEM & CONSOLE LOG -->
         <div class="window">
             <div class="window-header">
-                <span>sys_terminal_log.log</span>
+                <span>riccardo_system_log.txt</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -369,22 +439,22 @@
             </div>
             <div class="window-body">
                 <div class="sys-log">
-                    <div class="sys-line">>> INITIALIZING 808s CORE... <span style="color: #00ff66;">[OK]</span></div>
-                    <div class="sys-line">>> CHECKING EMOTIONAL_DRIVER... <span style="color: #00ff66;">[CONNECTED]</span></div>
-                    <div class="sys-line">>> ROLAND_TR-808_PITCH: <span class="glow-text">LOW_FREQ</span></div>
-                    <div class="sys-line">>> WARNING: OVERHEATING HEART_CHIP_1984</div>
-                    <div class="sys-line">>> DEPLOYED_VIA_GITHUB_PAGES: <span style="color: #00ff66;">TRUE</span></div>
+                    <div class="sys-line">>> ACCESS GRANTED TO: <span class="glow-text">USER_RICCARDO</span></div>
+                    <div class="sys-line">>> SYSTEM: <span style="color: #107c10;">XBOX_360_KERNEL_v2.0.1888.0</span></div>
+                    <div class="sys-line">>> STORAGE_DEVICE: <span style="color: #00ff66;">PSP_MEMORY_STICK_16GB</span></div>
+                    <div class="sys-line">>> AUDIO_ENGINE: Roland TR-808 Emulator Active</div>
+                    <div class="sys-line">>> DEPLOYMENT_HOST: github.io/808s-and-heartclick/</div>
                     <div class="sys-line" style="font-size: 0.7rem; color: #718096; margin-top: 5px;">
-                        "Welcome to the retro isolation chamber."
+                        "Anni 2000 hardware simulation. Keep the bass loud."
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- WINDOW 3: IMAGE VIEWER 1 (Kanye Studio) -->
+        <!-- WINDOW 3: NUOVA FOTO 1 (b32682...) -->
         <div class="window">
             <div class="window-header">
-                <span>ye_studio_archive_01.jpg</span>
+                <span>ye_performance_archive.png</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -393,16 +463,35 @@
             </div>
             <div class="window-body">
                 <div class="image-container">
-                    <img src="https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png" class="y2k-img" alt="Kanye Trilogy">
-                    <div class="caption">ID: JEEN_YUHS_TRILOGY // YEAR: 2000s</div>
+                    <img src="https://i.pinimg.com/736x/b3/26/82/b326826540399ee1f1c74db6a6ed767a.jpg" class="y2k-img" alt="Kanye Live Performance">
+                    <div class="caption">ID: LIVE_SESSION_808s // CORE: EMOTIONAL_DISCHARGE</div>
                 </div>
             </div>
         </div>
 
-        <!-- WINDOW 4: IMAGE VIEWER 2 (808s Heart) -->
+        <!-- WINDOW 4: NUOVA FOTO 2 (RUOTATA ANTICLOCKWISE) -->
         <div class="window">
             <div class="window-header">
-                <span>broken_heart_aesthetic.png</span>
+                <span>rotated_polaroid.png</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="image-container" style="background: #050505;">
+                    <!-- Immagine ruotata di 90 gradi in senso antiorario -->
+                    <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" class="y2k-img rotated-img" alt="Rotated Portrait">
+                    <div class="caption" style="margin-top: 15px;">ID: ROTATED_AESTHETIC_90deg // BYPASS: VERTICAL_LIMITS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 5: LA TUA FOTO PERSONALE DEL 2004 -->
+        <div class="window" style="grid-column: 1 / -1;">
+            <div class="window-header">
+                <span>riccardo_archive_2004_snapshot.dat</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
@@ -411,28 +500,16 @@
             </div>
             <div class="window-body">
                 <div class="image-container">
-                    <img src="https://i.pinimg.com/1200x/41/ae/98/41ae98537372146d25c605cc5f61e01e.jpg" class="y2k-img heart-img" alt="Heart Aesthetic">
-                    <div class="caption">ID: HEART_CORE_DS // STATUS: DEFUSED</div>
+                    <!-- FOTO DEL 2004: Inserisci il link della tua foto nel src qui sotto -->
+                    <img src="https://drive.google.com/u/0/drive-viewer/AKGpihaDNQDLWwFvJka5ZXcH2a2MT-UfDLVNF8cesWMFIRmjXpcHJrbsp-RLcLaoiPAotJIWykAHEFoQE27VgcTgnZnsc6qXbfHUhFo=s1600-rw-v1?auditContext=forDisplay" class="y2k-img" style="max-height: 350px; object-fit: contain;" alt="Riccardo 2004 Snapshot" onerror="this.src='https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png'; this.style.opacity='0.4';">
+                    <div class="caption">
+                        <strong>DATA_RECOVERY_STATUS:</strong> 100% RECOVERED // <strong>HARDWARE:</strong> RETRO_CHIP_2004 // <strong>LOCATION:</strong> HOME_PC_BACKUP_DISK
+                        <p style="margin-top: 5px; font-size: 0.75rem; color: #ff3366;">[!] Ricordo analogico archiviato con successo nel file system di Riccardo.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <!-- Orologio Funzionante -->
-    <script>
-        function updateClock() {
-            const clockEl = document.getElementById('clock');
-            if (clockEl && window.innerWidth > 768) {
-                const now = new Date();
-                let hours = now.getHours().toString().padStart(2, '0');
-                let minutes = now.getMinutes().toString().padStart(2, '0');
-                let seconds = now.getSeconds().toString().padStart(2, '0');
-                clockEl.textContent = `${hours}:${minutes}:${seconds}`;
-            }
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
 </body>
 </html>
