@@ -536,5 +536,66 @@
             </div>
         </div>
     </div>
+
+<!-- WINDOW 7: OUTLOOK EXPRESS EMAIL BOX (WINDOWS XP STYLE) -->
+        <div class="window" style="grid-column: 1 / -1; margin-top: 15px;">
+            <div class="window-header" style="background: linear-gradient(90deg, #166aee 0%, #0053e1 100%);">
+                <span>Outlook_Express_v6.0 - [New Message to Riccardo]</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            
+            <!-- Barra Strumenti stile Outlook XP -->
+            <div style="background: #ece9d8; padding: 5px 10px; border-bottom: 1px solid #d6d3c2; display: flex; gap: 15px; align-items: center;">
+                <button type="submit" form="xp-contact-form" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                    <span style="font-size: 1.2rem;">✉</span>
+                    <span style="font-size: 0.7rem; color: #000; font-family: Tahoma, sans-serif; font-weight: bold;">Send</span>
+                </button>
+                <div style="width: 1px; height: 25px; background: #b5b2a1;"></div>
+                <div style="font-size: 0.75rem; color: #555; font-family: Tahoma, sans-serif;">To: riccardo_sys_admin@808s.net</div>
+            </div>
+
+            <div class="window-body" style="background: #ffffff; color: #000000; padding: 15px;">
+                <!-- FORM DI CONTATTO -->
+                <!-- Sostituisci "IL_TUO_ID_FORMSPREE" con l'ID che ti darà Formspree -->
+                <form id="xp-contact-form" action="https://formspree.io/f/mpqvqvdk" method="POST" style="display: flex; flex-direction: column; gap: 12px; font-family: Tahoma, sans-serif;">
+                    
+                    <!-- Campo Nome (Opzionale) -->
+                    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
+                        <label for="from-name" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">From:</label>
+                        <input type="text" id="from-name" name="name" placeholder="Anonymous Sender" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent;">
+                        <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
+                    </div>
+
+                    <!-- Campo Email (Consigliato per potergli rispondere) -->
+                    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
+                        <label for="from-email" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Email:</label>
+                        <input type="email" id="from-email" name="email" required placeholder="your_email@domain.com" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                    </div>
+
+                    <!-- Campo Oggetto (Obbligatorio) -->
+                    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
+                        <label for="subject" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Subject:</label>
+                        <input type="text" id="subject" name="_subject" required placeholder="808s_Feedback_System" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                    </div>
+
+                    <!-- Area di Testo Messaggio -->
+                    <div style="margin-top: 10px;">
+                        <textarea id="message" name="message" required placeholder="Type your analog message here..." style="width: 100%; min-height: 120px; border: 1px solid #b5b2a1; padding: 10px; font-size: 0.9rem; outline: none; resize: vertical; font-family: 'Share Tech Mono', monospace; background-color: #fafafa; color: #111;"></textarea>
+                    </div>
+
+                    <!-- Bottone per Mobile se non usano il tasto in alto -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
+                        <button type="submit" style="background: linear-gradient(180deg, #0053e1 0%, #003db8 100%); color: white; border: 1px solid #002c9a; padding: 6px 20px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
 </body>
 </html>
