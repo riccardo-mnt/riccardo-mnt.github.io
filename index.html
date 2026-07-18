@@ -429,10 +429,6 @@
             transition: filter 0.3s;
         }
 
-        .heart-img {
-            aspect-ratio: 1 / 1;
-        }
-
         .caption {
             font-size: 0.7rem;
             color: #8899a6;
@@ -451,17 +447,11 @@
             justify-content: center;
         }
 
-        /* Uniforma il formato dei riquadri nell'archivio criptato,
-           cosi' la griglia a 2 elementi risulta simmetrica */
         .secure-tile-img {
             aspect-ratio: 4 / 3;
         }
 
         /* ARCHIVE ENCRYPTION SYSTEM STYLE */
-
-        /* Contenitore relativo che fa da "cornice" per l'overlay di sblocco:
-           l'overlay viene centrato esattamente sopra la griglia sfocata,
-           invece di essere semplicemente impilato sopra di essa nel flusso. */
         .crypto-frame {
             position: relative;
             min-height: 260px;
@@ -577,7 +567,7 @@
 
     <div class="desktop">
 
-        <!-- HEADER STILE PSP (PULITO E CENTRALIZZATO) -->
+        <!-- HEADER STILE PSP -->
         <header class="full-width">
             <div class="psp-logo" id="glitch-target">★ // [RICCARDO]</div>
         </header>
@@ -643,7 +633,8 @@
                         </div>
                         <div class="ios-call-screen">
                             <div style="text-align: center;">
-                                <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Jesse Pinkman</h2>
+                                <!-- CORREZIONE 2: Cambiato in "No caller ID" -->
+                                <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">No caller ID</h2>
                                 <div id="call-status" style="font-size: 13px; color: #d1e2f2; font-weight: 300; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
                             </div>
                             <audio id="jesse-audio" src="jesse.mp3" preload="auto"></audio>
@@ -710,13 +701,14 @@
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 300px; background: #050505;">
-                <div class="image-container" style="border: none; background: transparent; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center; overflow: visible;">
+            <!-- CORREZIONE 1: Sistemati altezza e overflow del contenitore per evitare il taglio dell'immagine ruotata -->
+            <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 400px; background: #050505; overflow: hidden;">
+                <div class="image-container" style="border: none; background: transparent; width: 100%; max-width: 200px; aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center; overflow: visible;">
                     <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
                          style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.3); border-radius: 4px;" 
                          alt="Rotated Portrait">
                 </div>
-                <div class="caption" style="margin-top: 15px; z-index: 10;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
+                <div class="caption" style="margin-top: 60px; z-index: 10;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
             </div>
         </div>
 
@@ -759,11 +751,9 @@
                     📂 Directory: 2 Files Detected // Access: <span id="crypto-status" style="color: var(--neon-pink);">RESTRICTED</span>
                 </div>
 
-                <!-- FRAME relativo: overlay e griglia condividono lo stesso riquadro,
-                     cosi' il lucchetto e' perfettamente centrato sopra i placeholder -->
                 <div class="crypto-frame">
 
-                    <!-- LA GRIGLIA REALE (sotto, sfocata finche' non sbloccata) -->
+                    <!-- LA GRIGLIA REALE -->
                     <div class="explorer-grid" id="secure-photo-grid" style="width: 100%; align-self: center;">
                         <div class="image-container" style="padding: 6px;">
                             <div class="y2k-img secure-tile-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
@@ -775,11 +765,17 @@
                         </div>
                     </div>
 
-                    <!-- COPERTURA DI SICUREZZA (ora vero overlay centrato sopra la griglia) -->
+                    <!-- COPERTURA DI SICUREZZA -->
                     <div id="crypto-lock-screen" class="crypto-overlay">
                         <div class="crypto-title">[!] CRITICAL ALERT: DATA ENCRYPTED [!]</div>
+                        
+                        <!-- CORREZIONE 4: Aggiunto l'indizio sui ricordi in inglese -->
+                        <p style="font-size: 0.8rem; color: #00ffcc; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px;">
+                            [CONTENT INDICATOR: ANALOG MEMORIES ARCHIVE]
+                        </p>
+                        
                         <p style="font-size: 0.75rem; color: #8899a6; max-width: 500px; text-transform: uppercase;">
-                            This partition contains analog hardware snapshots registered by USER_RICCARDO. Enter security authentication bypass key to mount image files.
+                            This partition contains encrypted personal snapshots and retro hardware memories registered by USER_RICCARDO. Enter security authentication bypass key to mount image files.
                         </p>
                         <div class="crypto-input-wrapper">
                             <input type="password" id="crypto-key" placeholder="ENTER ACCESS KEY" class="crypto-field">
@@ -898,7 +894,7 @@
         glitchTarget.addEventListener('click', triggerGlitch);
 
 
-        // SECURE RETRO CRYPTO DECRYPTION SYSTEM (Listener nativi stabili)
+        // SECURE RETRO CRYPTO DECRYPTION SYSTEM
         async function checkCryptoKey() {
             let keyInput = document.getElementById('crypto-key').value;
             const errorMsg = document.getElementById('crypto-error');
@@ -906,14 +902,11 @@
             const lockScreen = document.getElementById('crypto-lock-screen');
             const gridContainer = document.getElementById('secure-photo-grid');
 
-            // Sanificazione dell'input in minuscolo e pulizia spazi
-            // (cosi' "Madrid", "MADRID", "madrid" ecc. vengono tutti accettati)
             keyInput = keyInput.trim().toLowerCase();
 
-            // Impronta SHA-256 corretta della stringa "madrid"
+            // Impronta SHA-256 della stringa "madrid"
             const targetHash = "1579a6e3112caba1b6031ef7c507f3014d7b0a408fefd1b4d4a2c8c32d2274ff";
 
-            // Calcolo dell'hash nativo nel browser
             const msgBuffer = new TextEncoder().encode(keyInput);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -925,11 +918,12 @@
                 statusLabel.style.color = "var(--neon-cyan)";
                 lockScreen.style.display = 'none';
 
-                // Iniezione degli elementi immagine reali solo ad autorizzazione completata
+                // CORREZIONE 3: Rimosso il gestore "onerror" che nascondeva i contenitori in assenza dei file locali,
+                // permettendo così di vedere la struttura di entrambi i riquadri una volta sbloccati.
                 gridContainer.innerHTML = `
                     <!-- FOTO 1: RICCARDO 2008 -->
                     <div class="image-container" style="padding: 6px;">
-                        <img src="Riccardo_2008.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008" onerror="this.parentNode.style.display='none';">
+                        <img src="Riccardo_2008.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008">
                         <div class="caption" style="margin-top: 8px;">
                             <strong>riccardo.jpg</strong>
                             <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2008</p>
@@ -938,7 +932,7 @@
 
                     <!-- FOTO 2: RICCARDO 2009 (R1) -->
                     <div class="image-container" style="padding: 6px;">
-                        <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009" onerror="this.parentNode.style.display='none';">
+                        <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009">
                         <div class="caption" style="margin-top: 8px;">
                             <strong>Riccardo_2009.jpg</strong>
                             <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">Tech_Snapshot</p>
@@ -951,7 +945,6 @@
             }
         }
 
-        // Assegnazione sicura dei listener per evitare blocchi o glitch asincroni inline
         document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
         document.getElementById('crypto-key').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -981,7 +974,7 @@
 [RICCARDO_OS - INCOMING TRANSMISSION]
 ====================================
 SENDER:   ${uName}
-EMAIL:   ${uEmail}
+EMAIL:    ${uEmail}
 SUBJECT: ${uSubject}
 ------------------------------------
 MESSAGE:
