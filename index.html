@@ -832,10 +832,10 @@
             </div>
         </div>
 
-        <!-- REQUEST TITLE -->
+        <!-- REQUEST TITLE - Easter Egg R (18) -->
         <div class="full-width" style="margin-top: 25px; margin-bottom: 5px; padding-left: 5px;">
             <p style="color: var(--neon-pink); font-size: 0.9rem; text-shadow: 0 0 5px rgba(255, 51, 102, 0.4); letter-spacing: 1px;">
-                &gt;&gt; SYS_REQUEST: <span style="color: var(--neon-cyan); text-decoration: underline;">WRITE_ME_SOMETHING...</span>
+                &gt;&gt; SYS_REQUEST: <span onclick="showEasterEggR()" style="color: var(--neon-cyan); text-decoration: underline; cursor: pointer;">WRITE_ME_SOMETHING...</span>
             </p>
         </div>
     
@@ -984,6 +984,13 @@
             alert(
                 "== ⍰ ==\n\n" +
                 "Who's calling? His name is long, but not enough. Add 1.\n\n"
+            );
+        }
+
+        function showEasterEggR() {
+            alert(
+                "== ⍰ ==\n\n" +
+                "How old did I turn in 2022?\n\n" +
             );
         }
 
