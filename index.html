@@ -298,7 +298,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 66px rgba(0,0,0,0.3);
         }
 
         /* IPHONE 4 SIMULATOR */
@@ -660,7 +660,8 @@
                                 <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">No caller ID</h2>
                                 <div id="call-status" style="font-size: 13px; color: #d1e2f2; font-weight: 300; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
                             </div>
-                            <audio id="jesse-audio" src="jesse.mp3" preload="auto"></audio>
+                            <!-- RIMAPPATO: audio/jesse.mp3 -->
+                            <audio id="jesse-audio" src="audio/jesse.mp3" preload="auto"></audio>
                             <div class="ios-btn-container">
                                 <button onclick="handleJesseAudio('toggle')" id="jesse-play-btn" class="ios-btn ios-btn-green">Start Call</button>
                                 <button onclick="handleJesseAudio('stop')" class="ios-btn ios-btn-red">End Call</button>
@@ -672,7 +673,7 @@
             </div>
         </div>
 
-        <!-- WINDOW 3: CORREZIONE 1 - NUOVA SCHEDA RODEO.JPG IN STATO WIDESCREEN -->
+        <!-- WINDOW 3: SCHEDA RODEO.JPG -->
         <div class="window">
             <div class="window-header">
                 <span>rodeo_2015.png</span>
@@ -684,7 +685,8 @@
             </div>
             <div class="window-body" style="padding: 12px;">
                 <div class="image-container" style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
-                    <img src="rodeo.jpg" 
+                    <!-- RIMAPPATO: img/rodeo.jpg -->
+                    <img src="img/rodeo.jpg" 
                          style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" 
                          alt="Rodeo Session Thumbnail">
                 </div>
@@ -895,7 +897,7 @@
     </div>
 
     <script>
-        // CORREZIONE 2: MOTORE DI AVVIO DELLA CONSOLE AL CARICAMENTO DELLA PAGINA
+        // CONSOLE DI LOG AL CARICAMENTO DELLA PAGINA
         const logLines = [
             ">> ACCESS GRANTED TO: USER_RICCARDO",
             ">> SYSTEM: XBOX_360_KERNEL_v2.0.1888.0",
@@ -921,22 +923,20 @@
                     
                     container.appendChild(line);
                     index++;
-                    // Modificato da 350ms a 100ms per stampare le righe molto più velocemente
                     setTimeout(printNextLine, 100); 
                 } else {
-                    // Modificato da 1000ms a 300ms: la schermata inizia a sparire quasi subito dopo l'ultimo log
                     setTimeout(() => {
                         container.style.opacity = '0';
                         setTimeout(() => {
                             container.style.visibility = 'hidden';
-                        }, 400); // Tempo di dissolvenza leggermente più reattivo
+                        }, 400); 
                     }, 300);
                 }
             }
             printNextLine();
         });
 
-        // TEMPORARY GLITCH EFFECT LOGIC
+        // GLITCH EFFECT LOGIC
         const glitchTarget = document.getElementById('glitch-target');
         let glitchTimeout;
 
@@ -1015,17 +1015,17 @@
                             statusLabel.style.color = "var(--xbox-green)";
                             lockScreen.style.display = 'none';
 
-                            // CORREZIONE: Aggiunto posizionamento relativo e z-index elevato sui tag <img> per bypassare la grana CRT
+                            // RIMAPPATO: i percorsi puntano ora a img/Riccardo_2009.jpg e img/r1.jpg
                             gridContainer.innerHTML = `
                                 <div class="image-container" style="padding: 6px;">
-                                    <img src="Riccardo_2009.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
+                                    <img src="img/Riccardo_2009.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
                                     <div class="caption" style="margin-top: 8px;">
                                         <strong>File_0.jpg</strong>
                                         <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
                                     </div>
                                 </div>
                                 <div class="image-container" style="padding: 6px;">
-                                    <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
+                                    <img src="img/r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
                                     <div class="caption" style="margin-top: 8px;">
                                         <strong>File_1.jpg</strong>
                                         <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
@@ -1043,7 +1043,7 @@
             }
         }
 
-        // ASSEGNAZIONE DELLE FUNZIONI AI BOTTONI E AL TASTO INVIO (REINSERITI QUI SOTTO)
+        // LISTENERS VERIFICA PASSWORD
         document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
         document.getElementById('crypto-key').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -1130,7 +1130,7 @@ LANG:        ${navigator.language || navigator.userLanguage}
                         jessePlayBtn.style.borderColor = "#145c14";
                     })
                     .catch(err => {
-                        alert("Assicurati di aver caricato il file 'jesse.mp3' nella root di GitHub!");
+                        alert("Assicurati di aver caricato il file 'jesse.mp3' nella cartella audio!");
                     });
                 } else {
                     jesseAudio.pause();
