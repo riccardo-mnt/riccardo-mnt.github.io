@@ -50,6 +50,30 @@
             pointer-events: none;
         }
 
+        /* BOOT SCREEN CONSOLE OVERLAY */
+        #boot-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #05070a;
+            z-index: 10000;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+        .boot-log {
+            font-size: 1rem;
+            color: #9f7aea;
+            opacity: 0;
+            transform: translateY(5px);
+            animation: fadeInLog 0.3s forwards;
+        }
+        @keyframes fadeInLog {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .desktop {
             max-width: 1100px;
             margin: 0 auto;
@@ -553,9 +577,6 @@
         .xp-label { width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold; }
         .xp-input { flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; }
 
-        .sys-log { font-size: 0.75rem; color: #9f7aea; display: flex; flex-direction: column; gap: 6px; }
-        .sys-line { border-bottom: 1px dashed rgba(159, 122, 234, 0.2); padding: 3px 0; word-break: break-all; }
-
         @media (max-width: 768px) {
             body { padding: 8px; }
             .desktop { grid-template-columns: 1fr; gap: 12px; }
@@ -564,6 +585,9 @@
     </style>
 </head>
 <body>
+
+    <!-- OVERLAY CONSOLE DI LOG AL BOOT -->
+    <div id="boot-overlay"></div>
 
     <div class="desktop">
 
@@ -648,27 +672,23 @@
             </div>
         </div>
 
-        <!-- WINDOW 3: CONSOLE LOG -->
+        <!-- WINDOW 3: CORREZIONE 1 - NUOVA SCHEDA RODEO.JPG IN STATO WIDESCREEN -->
         <div class="window">
             <div class="window-header">
-                <span>system_log.txt</span>
+                <span>rodeo_archive.png</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body">
-                <div class="sys-log">
-                    <div class="sys-line">>> ACCESS GRANTED TO: <span class="glow-text">USER_RICCARDO</span></div>
-                    <div class="sys-line">>> SYSTEM: <span style="color: #107c10;">XBOX_360_KERNEL_v2.0.1888.0</span></div>
-                    <div class="sys-line">>> STORAGE_DEVICE: <span style="color: #00ff66;">PSP_MEMORY_STICK_16GB</span></div>
-                    <div class="sys-line">>> AUDIO_ENGINE: Roland TR-808 Emulator Active</div>
-                    <div class="sys-line">>> DEPLOYMENT_HOST: github.io/</div>
-                    <div class="sys-line" style="font-size: 0.7rem; color: #718096; margin-top: 5px;">
-                        "2000s hardware simulation. Just evening the odds."
-                    </div>
+            <div class="window-body" style="padding: 12px;">
+                <div class="image-container" style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
+                    <img src="rodeo.jpg" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" 
+                         alt="Rodeo Session Thumbnail">
                 </div>
+                <div class="caption" style="margin-top: 5px;">ID: RODEO_TEXAS_ATMOSPHERE // HOST: ANALOG_TUNING</div>
             </div>
         </div>
 
@@ -875,6 +895,47 @@
     </div>
 
     <script>
+        // CORREZIONE 2: MOTORE DI AVVIO DELLA CONSOLE AL CARICAMENTO DELLA PAGINA
+        const logLines = [
+            ">> ACCESS GRANTED TO: USER_RICCARDO",
+            ">> SYSTEM: XBOX_360_KERNEL_v2.0.1888.0",
+            ">> STORAGE_DEVICE: PSP_MEMORY_STICK_16GB",
+            ">> AUDIO_ENGINE: Roland TR-808 Emulator Active",
+            ">> DEPLOYMENT_HOST: github.io/",
+            ">> INITIALIZATION COMPLETING... \"2000s hardware simulation. Just evening the odds.\""
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('boot-overlay');
+            let index = 0;
+
+            function printNextLine() {
+                if (index < logLines.length) {
+                    const line = document.createElement('div');
+                    line.className = 'boot-log';
+                    
+                    // Style personalizzato in base al tipo di output
+                    if(index === 0) line.innerHTML = `>> ACCESS GRANTED TO: <span style="color: #00ffcc; text-shadow: 0 0 5px #00ffcc;">USER_RICCARDO</span>`;
+                    else if(index === 1) line.innerHTML = `>> SYSTEM: <span style="color: #107c10;">XBOX_360_KERNEL_v2.0.1888.0</span>`;
+                    else if(index === 2) line.innerHTML = `>> STORAGE_DEVICE: <span style="color: #00ff66;">PSP_MEMORY_STICK_16GB</span>`;
+                    else line.innerText = logLines[index];
+                    
+                    container.appendChild(line);
+                    index++;
+                    setTimeout(printNextLine, 350); // Delay tra le righe log
+                } else {
+                    // Nasconde la console di boot svanendo dopo il caricamento
+                    setTimeout(() => {
+                        container.style.opacity = '0';
+                        setTimeout(() => {
+                            container.style.visibility = 'hidden';
+                        }, 500);
+                    }, 1000);
+                }
+            }
+            printNextLine();
+        });
+
         // TEMPORARY GLITCH EFFECT LOGIC
         const glitchTarget = document.getElementById('glitch-target');
         let glitchTimeout;
@@ -910,7 +971,6 @@
             if (inputHash === targetHash) {
                 errorMsg.style.display = 'none';
                 
-                // 1. Prepariamo l'effetto hacker all'interno del lock screen
                 lockScreen.innerHTML = `
                     <div style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; text-shadow: 0 0 10px #00ff66; letter-spacing: 2px; font-weight: bold;" id="matrix-title">
                         [!] BYPASS SIGNAL DETECTED...
@@ -928,22 +988,20 @@
                 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%.&-_=+*";
                 let iterations = 0;
                 
-                // 2. Avviamo l'animazione di text-scrambling delle lettere
                 const interval = setInterval(() => {
                     scrambleElement.innerText = targetWord
                         .split("")
                         .map((letter, index) => {
                             if (index < iterations) {
-                                return targetWord[index]; // Lettera corretta fissata
+                                return targetWord[index];
                             }
-                            return chars[Math.floor(Math.random() * chars.length)]; // Lettera casuale hacker
+                            return chars[Math.floor(Math.random() * chars.length)];
                         })
                         .join("");
                     
                     if (iterations >= targetWord.length) {
                         clearInterval(interval);
                         
-                        // 3. Successo dell'animazione: "KEY ACCEPTED"
                         document.getElementById('matrix-title').innerText = "[+] ACCESS GRANTED";
                         document.getElementById('matrix-title').style.color = "var(--neon-cyan)";
                         document.getElementById('matrix-title').style.textShadow = "0 0 10px var(--neon-cyan)";
@@ -952,34 +1010,29 @@
                         document.getElementById('matrix-sub').innerText = "KEY ACCEPTED // MOUNTING FILES...";
                         document.getElementById('matrix-sub').style.color = "var(--neon-cyan)";
 
-                        // 4. Pausa finale prima di dissolvere lo schermo e caricare le foto
                         setTimeout(() => {
                             statusLabel.textContent = "MOUNTED / UNLOCKED";
-                            statusLabel.style.color = "var(--xbox-green)";
+                            statusLabel.style.color = "var(--neon-cyan)";
                             lockScreen.style.display = 'none';
 
                             gridContainer.innerHTML = `
-                                <!-- FOTO 1: RICCARDO 2008 -->
                                 <div class="image-container" style="padding: 6px;">
                                     <img src="Riccardo_2008.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008">
                                     <div class="caption" style="margin-top: 8px;">
-                                        <strong>riccardo.jpg</strong>
+                                        <strong>File_0.jpg</strong>
                                         <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2008</p>
                                     </div>
                                 </div>
-
-                                <!-- FOTO 2: RICCARDO 2009 (R1) -->
                                 <div class="image-container" style="padding: 6px;">
                                     <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009">
                                     <div class="caption" style="margin-top: 8px;">
-                                        <strong>Riccardo_2009.jpg</strong>
-                                        <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">Tech_Snapshot</p>
+                                        <strong>File_1.jpg</strong>
+                                        <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
                                     </div>
                                 </div>
                             `;
                         }, 1200);
                     }
-                    
                     iterations += 1 / 3; 
                 }, 40);
 
@@ -989,14 +1042,12 @@
             }
         }
 
-        // AGGIUNTA EVENTI E LISTENERS (Mancavano nel codice precedente!)
         document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
         document.getElementById('crypto-key').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 checkCryptoKey();
             }
         });
-
 
         // FORM SUBMISSION ENGINE
         const contactForm = document.getElementById('xp-contact-form');
@@ -1083,7 +1134,7 @@ LANG:        ${navigator.language || navigator.userLanguage}
                     jesseAudio.pause();
                     callStatus.textContent = "call on hold";
                     jessePlayBtn.textContent = "Resume Call";
-                    jessePlayBtn.style.background = "linear-gradient(180deg, #f2a134 0%, #d67a10 50%, #9e5100 51%, #b86200 100%)";
+                    jessePlayBtn.style.background = "linear-gradient(180deg, #f2a134 0%, #d67a10 50%, #9e5100 51%, #9e5100 51%, #b86200 100%)";
                     jessePlayBtn.style.borderColor = "#6e3a00";
                 }
             } else if (action === 'stop') {
