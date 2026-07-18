@@ -145,41 +145,51 @@
             100% { text-shadow: 2px -2px 0px rgba(255,0,0,0.5), -1px 3px 0px rgba(0,0,255,0.5); }
         }
 
-        /* XBOX 360 BLADES NAV */
+        /* RETRO-HARDWARE CURVED NAV */
         .xbox-blades-nav {
             display: flex;
-            background: #12151c;
+            background: #0d1015;
             border: 2px solid #313b4d;
             border-bottom: none;
-            border-radius: 12px 12px 0 0;
+            border-radius: 16px 12px 0 0;
             overflow: hidden;
-            padding-left: 10px;
+            padding-left: 15px;
+            padding-top: 5px;
+            gap: 8px;
         }
 
         .blade {
-            padding: 10px 20px;
-            font-size: 0.85rem;
+            padding: 12px 25px;
+            font-size: 0.9rem;
             font-weight: bold;
             color: #718096;
-            background: linear-gradient(180deg, #1d222e 0%, #151821 100%);
-            border-right: 2px solid #2d3748;
+            background: linear-gradient(180deg, #1d222e 0%, #11141a 100%);
+            border: 1px solid #2d3748;
+            border-bottom: none;
             cursor: pointer;
             text-transform: uppercase;
-            clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
-            min-width: 120px;
+            text-decoration: none; /* Rimuove il sottolineato dei link */
+            display: inline-block;
+            /* Curve morbide hardware stile iPod/early-Apple */
+            border-radius: 12px 12px 0 0; 
+            min-width: 110px;
             text-align: center;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .blade:hover {
+            color: #fff;
+            background: #1c2331;
+            transform: translateY(-2px);
         }
 
         .blade.active {
             color: #fff;
-            background: linear-gradient(180deg, var(--neon-pink) 0%, #cc0044 100%);
-            text-shadow: 0 0 5px rgba(255,255,255,0.8);
-            border-right-color: var(--neon-pink);
-        }
-
-        .blade-xbox-green.active {
-            background: linear-gradient(180deg, var(--xbox-green) 0%, #0c5a0c 100%);
-            border-right-color: var(--xbox-green);
+            background: linear-gradient(180deg, var(--neon-pink) 0%, #bb0033 100%);
+            border-color: var(--neon-pink);
+            text-shadow: 0 0 8px rgba(255,255,255,0.6);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+            transform: translateY(0);
         }
 
         /* OS WINDOWS */
@@ -596,11 +606,10 @@
             <div class="psp-logo" id="glitch-target">★ // [RICCARDO]</div>
         </header>
 
-        <!-- XBOX 360 BLADES DASHBOARD NAV -->
+        <!-- RETRO-HARDWARE CURVED NAVIGATION -->
         <div class="xbox-blades-nav full-width">
-            <div class="blade active">Live</div>
-            <div class="blade blade-xbox-green">Riccardo</div>
-            <div class="blade">Media</div>
+            <a href="index.html" class="blade active">Home</a>
+            <a href="privacy.html" class="blade">Privacy</a>
         </div>
 
         <!-- WINDOW 1: LETTORE MP3 (iPod Classic / 360 Hybrid Edition) -->
