@@ -444,17 +444,39 @@
 
         .explorer-grid {
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 15px;
+            max-width: 620px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        /* Uniforma il formato dei riquadri nell'archivio criptato,
+           cosi' la griglia a 2 elementi risulta simmetrica */
+        .secure-tile-img {
+            aspect-ratio: 4 / 3;
         }
 
         /* ARCHIVE ENCRYPTION SYSTEM STYLE */
+
+        /* Contenitore relativo che fa da "cornice" per l'overlay di sblocco:
+           l'overlay viene centrato esattamente sopra la griglia sfocata,
+           invece di essere semplicemente impilato sopra di essa nel flusso. */
+        .crypto-frame {
+            position: relative;
+            min-height: 260px;
+            display: flex;
+            align-items: stretch;
+        }
+
         .crypto-overlay {
-            grid-column: 1 / -1;
-            background: radial-gradient(circle, #1a080d 0%, #050002 100%);
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background: radial-gradient(circle, rgba(26,8,13,0.92) 0%, rgba(5,0,2,0.96) 100%);
             border: 2px dashed var(--neon-pink);
             border-radius: 6px;
-            padding: 30px 20px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -481,6 +503,7 @@
             overflow: hidden;
             max-width: 320px;
             width: 100%;
+            margin: 0 auto;
             box-shadow: 0 0 10px rgba(255, 51, 102, 0.2);
         }
 
@@ -493,6 +516,8 @@
             font-family: 'Share Tech Mono', monospace;
             font-size: 0.9rem;
             flex-grow: 1;
+            width: 0;
+            min-width: 0;
             text-align: center;
             letter-spacing: 3px;
         }
@@ -507,6 +532,7 @@
             cursor: pointer;
             font-size: 0.85rem;
             text-transform: uppercase;
+            flex-shrink: 0;
             transition: all 0.2s;
         }
 
@@ -733,31 +759,37 @@
                     📂 Directory: 2 Files Detected // Access: <span id="crypto-status" style="color: var(--neon-pink);">RESTRICTED</span>
                 </div>
 
-                <!-- COPERTURA DI SICUREZZA (STILE RETRO FILM HACKER) -->
-                <div id="crypto-lock-screen" class="crypto-overlay">
-                    <div class="crypto-title">[!] CRITICAL ALERT: DATA ENCRYPTED [!]</div>
-                    <p style="font-size: 0.75rem; color: #8899a6; max-width: 500px; text-transform: uppercase;">
-                        This partition contains analog hardware snapshots registered by USER_RICCARDO. Enter security authentication bypass key to mount image files.
-                    </p>
-                    <div class="crypto-input-wrapper">
-                        <input type="password" id="crypto-key" placeholder="ENTER ACCESS KEY" class="crypto-field">
-                        <button id="crypto-btn" class="crypto-btn">Decrypt</button>
-                    </div>
-                    <div id="crypto-error" style="font-size: 0.7rem; color: var(--neon-pink); display: none; text-transform: uppercase; margin-top: 5px;">
-                        [-] ACCESS DENIED: INVALID KEY STRING
-                    </div>
-                </div>
+                <!-- FRAME relativo: overlay e griglia condividono lo stesso riquadro,
+                     cosi' il lucchetto e' perfettamente centrato sopra i placeholder -->
+                <div class="crypto-frame">
 
-                <!-- LA GRIGLIA REALE -->
-                <div class="explorer-grid" id="secure-photo-grid">
-                    <div class="image-container" style="padding: 6px;">
-                        <div class="y2k-img heart-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
-                        <div class="caption" style="margin-top: 8px;"><strong>riccardo.jpg</strong></div>
+                    <!-- LA GRIGLIA REALE (sotto, sfocata finche' non sbloccata) -->
+                    <div class="explorer-grid" id="secure-photo-grid" style="width: 100%; align-self: center;">
+                        <div class="image-container" style="padding: 6px;">
+                            <div class="y2k-img secure-tile-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
+                            <div class="caption" style="margin-top: 8px;"><strong>riccardo.jpg</strong></div>
+                        </div>
+                        <div class="image-container" style="padding: 6px;">
+                            <div class="y2k-img secure-tile-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
+                            <div class="caption" style="margin-top: 8px;"><strong>2009.jpg</strong></div>
+                        </div>
                     </div>
-                    <div class="image-container" style="padding: 6px;">
-                        <div class="y2k-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
-                        <div class="caption" style="margin-top: 8px;"><strong>2009.jpg</strong></div>
+
+                    <!-- COPERTURA DI SICUREZZA (ora vero overlay centrato sopra la griglia) -->
+                    <div id="crypto-lock-screen" class="crypto-overlay">
+                        <div class="crypto-title">[!] CRITICAL ALERT: DATA ENCRYPTED [!]</div>
+                        <p style="font-size: 0.75rem; color: #8899a6; max-width: 500px; text-transform: uppercase;">
+                            This partition contains analog hardware snapshots registered by USER_RICCARDO. Enter security authentication bypass key to mount image files.
+                        </p>
+                        <div class="crypto-input-wrapper">
+                            <input type="password" id="crypto-key" placeholder="ENTER ACCESS KEY" class="crypto-field">
+                            <button id="crypto-btn" class="crypto-btn">Decrypt</button>
+                        </div>
+                        <div id="crypto-error" style="font-size: 0.7rem; color: var(--neon-pink); display: none; text-transform: uppercase; margin-top: 5px;">
+                            [-] ACCESS DENIED: INVALID KEY STRING
+                        </div>
                     </div>
+
                 </div>
 
                 <div style="margin-top: 15px; font-size: 0.7rem; color: #718096; text-align: center; border-top: 1px dashed rgba(255, 51, 102, 0.2); padding-top: 10px;">
@@ -875,10 +907,11 @@
             const gridContainer = document.getElementById('secure-photo-grid');
 
             // Sanificazione dell'input in minuscolo e pulizia spazi
+            // (cosi' "Madrid", "MADRID", "madrid" ecc. vengono tutti accettati)
             keyInput = keyInput.trim().toLowerCase();
 
-            // L'impronta SHA-256 corretta della stringa "madrid"
-            const targetHash = "e6900ee1b94747eb8af76a392b95fae223ad0377fa2c554e7c7e90c109ecf4a6";
+            // Impronta SHA-256 corretta della stringa "madrid"
+            const targetHash = "1579a6e3112caba1b6031ef7c507f3014d7b0a408fefd1b4d4a2c8c32d2274ff";
 
             // Calcolo dell'hash nativo nel browser
             const msgBuffer = new TextEncoder().encode(keyInput);
@@ -896,19 +929,19 @@
                 gridContainer.innerHTML = `
                     <!-- FOTO 1: RICCARDO 2008 -->
                     <div class="image-container" style="padding: 6px;">
-                        <img src="Riccardo_2008.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008" onerror="this.parentNode.style.display='none';">
+                        <img src="Riccardo_2008.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008" onerror="this.parentNode.style.display='none';">
                         <div class="caption" style="margin-top: 8px;">
                             <strong>riccardo.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
+                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2008</p>
                         </div>
                     </div>
 
                     <!-- FOTO 2: RICCARDO 2009 (R1) -->
                     <div class="image-container" style="padding: 6px;">
-                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009" onerror="this.parentNode.style.display='none';">
+                        <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009" onerror="this.parentNode.style.display='none';">
                         <div class="caption" style="margin-top: 8px;">
                             <strong>Riccardo_2009.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
+                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">Tech_Snapshot</p>
                         </div>
                     </div>
                 `;
