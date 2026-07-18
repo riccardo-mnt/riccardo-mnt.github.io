@@ -603,7 +603,7 @@
             <div class="blade">Media</div>
         </div>
 
-        <!-- WINDOW 1: LETTORE MP3 -->
+        <!-- WINDOW 1: LETTORE MP3 (iPod Classic / 360 Hybrid Edition) -->
         <div class="window">
             <div class="window-header">
                 <span>360_Media_Center.xex</span>
@@ -613,25 +613,44 @@
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body">
-                <div class="mp3-player">
-                    <div class="lcd-screen">
-                        <div class="track-info">
-                            <span>TRACK: 01_Say_You_Will.wav</span>
-                            <span>96 kbps</span>
+            <div class="window-body" style="background: #151821; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; min-height: 530px;">
+                
+                <!-- Chassi Hardware del Player -->
+                <div style="width: 280px; background: linear-gradient(135deg, #1e2330 0%, #0f1117 100%); border: 3px solid #2d3748; border-radius: 24px; padding: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 1px 3px rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                    
+                    <!-- Schermo LCD iPod Style Avanzato -->
+                    <div class="lcd-screen" style="width: 100%; height: 190px; margin-bottom: 0; background-color: #050d0a; border: 2px solid #1a2421; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="track-info" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                            <span style="color: #00ffaa; font-weight: bold;">TRACK: 01_Say_You_Will</span>
+                            <span style="color: #4a5568;">96 kbps</span>
                         </div>
-                        <div class="track-info">
-                            <span class="glow-text" style="color: var(--neon-pink);">PLAYING >> </span>
-                            <span>[02:14 / 06:17]</span>
+
+                        <!-- GIF perfettamente squadrata integrata come Album Art -->
+                        <div style="width: 95px; height: 90px; background: #000; border: 1px solid #142824; margin: 5px auto; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://c.tenor.com/p2w1siLrDksAAAAC/tenor.gif" style="width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated;" alt="Heart Waveform">
                         </div>
-                        <img src="https://c.tenor.com/p2w1siLrDksAAAAC/tenor.gif" class="heart-wave" alt="Heart Waveform">
+
+                        <div class="track-info" style="font-size: 0.7rem; border-top: 1px dashed rgba(0,255,102,0.15); padding-top: 4px;">
+                            <span class="glow-text" style="color: var(--neon-pink); font-weight: bold; text-shadow: 0 0 5px var(--neon-pink);">PLAYING</span>
+                            <span style="color: #00ff66;">[02:14 / 06:17]</span>
+                        </div>
                     </div>
-                    <div class="mp3-controls">
-                        <button class="mp3-btn" onclick="alert('Ciaoooo')">■</button>
-                        <button class="mp3-btn" onclick="alert('Who ordered that?')">▶</button>
-                        <button class="mp3-btn" onclick="alert('We fall apart as it gets dark')">||</button>
+
+                    <!-- RE-DESIGN: Apple iPod Touch Ring (Click Wheel) -->
+                    <div style="position: relative; width: 150px; height: 150px; background: linear-gradient(180deg, #f7f9fa 0%, #e2e8f0 100%); border-radius: 50%; border: 1px solid #cbd5e0; box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 2px 5px #fff, inset 0 -2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; user-select: none; margin-top: 5px;">
+                        
+                        <!-- Controlli cliccabili incisi sulla ghiera -->
+                        <div onclick="alert('MENU')" style="position: absolute; top: 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.7rem; font-weight: 700; color: #718096; cursor: pointer; letter-spacing: 0.5px;">MENU</div>
+                        <div onclick="alert('Who ordered that?')" style="position: absolute; bottom: 12px; font-size: 0.75rem; color: #718096; cursor: pointer; transform: scaleY(0.9);">▶||</div>
+                        <div onclick="alert('We fall apart as it gets dark')" style="position: absolute; right: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">&gt;&gt;|</div>
+                        <div onclick="alert('Ciaoooo')" style="position: absolute; left: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">|&lt;&lt;</div>
+
+                        <!-- Pulsante Centrale (Center Select Button) -->
+                        <button onclick="alert('TRACK SELECTED // v0.808')" style="width: 50px; height: 50px; background: linear-gradient(180deg, #edf2f7 0%, #cbd5e1 100%); border: 1px solid #bec8d5; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.15), inset 0 1px 0 #fff; cursor: pointer; outline: none; transition: transform 0.05s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'"></button>
                     </div>
+
                 </div>
+
             </div>
         </div>
 
