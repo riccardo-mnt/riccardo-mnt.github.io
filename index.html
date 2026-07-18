@@ -868,45 +868,58 @@
         glitchTarget.addEventListener('click', triggerGlitch);
 
 
-        // SECURE CRYPTO DECRYPTION SYSTEM (Anti-Inspect Bypass)
-        function checkCryptoKey() {
-            const keyInput = document.getElementById('crypto-key').value;
-            const errorMsg = document.getElementById('crypto-error');
-            const statusLabel = document.getElementById('crypto-status');
-            const lockScreen = document.getElementById('crypto-lock-screen');
-            const gridContainer = document.getElementById('secure-photo-grid');
+       // SECURE RETRO CRYPTO DECRYPTION SYSTEM (Anti-Inspect, Case-Insensitive & Hash Protection)
+async function checkCryptoKey() {
+    let keyInput = document.getElementById('crypto-key').value;
+    const errorMsg = document.getElementById('crypto-error');
+    const statusLabel = document.getElementById('crypto-status');
+    const lockScreen = document.getElementById('crypto-lock-screen');
+    const gridContainer = document.getElementById('secure-photo-grid');
 
-            if (keyInput === 'Madrid') {
-                errorMsg.style.display = 'none';
-                statusLabel.textContent = "MOUNTED / UNLOCKED";
-                statusLabel.style.color = "var(--neon-cyan)";
-                lockScreen.style.display = 'none';
+    // Forza la stringa in minuscolo per accettare qualsiasi combinazione di maiuscole/minuscole
+    keyInput = keyInput.trim().toLowerCase();
 
-                // Generiamo l'HTML pulito iniettando le sorgenti reali solo adesso
-                gridContainer.innerHTML = `
-                    <!-- FOTO 1: RICCARDO 2004 -->
-                    <div class="image-container" style="padding: 6px;">
-                        <img src="riccardo_2004.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2004" onerror="this.parentNode.style.display='none';">
-                        <div class="caption" style="margin-top: 8px;">
-                            <strong>riccardo.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
-                        </div>
-                    </div>
+ 
+    const targetHash = "e6900ee1b94747eb8af76a392b95fae223ad0377fa2c554e7c7e90c109ecf4a6";
 
-                    <!-- FOTO 2: R1 -->
-                    <div class="image-container" style="padding: 6px;">
-                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo r1" onerror="this.parentNode.style.display='none';">
-                        <div class="caption" style="margin-top: 8px;">
-                            <strong>2009.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
-                        </div>
-                    </div>
-                `;
-            } else {
-                errorMsg.style.display = 'block';
-                document.getElementById('crypto-key').value = '';
-            }
-        }
+    // Convertiamo l'input dell'utente in un hash SHA-256
+    const msgBuffer = new TextEncoder().encode(keyInput);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    // Adesso il confronto avviene tra due impronte cifrate e case-insensitive!
+    if (inputHash === targetHash) {
+        errorMsg.style.display = 'none';
+        statusLabel.textContent = "MOUNTED / UNLOCKED";
+        statusLabel.style.color = "var(--neon-cyan)";
+        lockScreen.style.display = 'none';
+
+        // Iniettiamo le sorgenti reali nel DOM solo ad autenticazione riuscita
+        gridContainer.innerHTML = `
+            <!-- FOTO 1: RICCARDO 2004 -->
+            <div class="image-container" style="padding: 6px;">
+                <img src="Riccardo_2008.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2004" onerror="this.parentNode.style.display='none';">
+                <div class="caption" style="margin-top: 8px;">
+                    <strong>riccardo.jpg</strong>
+                    <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
+                </div>
+            </div>
+
+            <!-- FOTO 2: R1 -->
+            <div class="image-container" style="padding: 6px;">
+                <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo r1" onerror="this.parentNode.style.display='none';">
+                <div class="caption" style="margin-top: 8px;">
+                    <strong>Riccardo_2009.jpg</strong>
+                    <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
+                </div>
+            </div>
+        `;
+    } else {
+        errorMsg.style.display = 'block';
+        document.getElementById('crypto-key').value = '';
+    }
+}
 
 
         // FORM SUBMISSION ENGINE
