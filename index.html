@@ -701,14 +701,14 @@
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <!-- CORREZIONE 1: Sistemati altezza e overflow del contenitore per evitare il taglio dell'immagine ruotata -->
-            <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 400px; background: #050505; overflow: hidden;">
-                <div class="image-container" style="border: none; background: transparent; width: 100%; max-width: 200px; aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center; overflow: visible;">
+            <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 340px; background: #050505; overflow: hidden; padding: 12px;">
+                <!-- La cornice .image-container ora racchiude perfettamente l'area della foto -->
+                <div class="image-container" style="width: 100%; max-width: 240px; aspect-ratio: 4 / 3; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
                     <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
-                         style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.3); border-radius: 4px;" 
+                         style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.4); border-radius: 4px;" 
                          alt="Rotated Portrait">
                 </div>
-                <div class="caption" style="margin-top: 60px; z-index: 10;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
+                <div class="caption" style="margin-top: 10px;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
             </div>
         </div>
 
@@ -923,9 +923,9 @@
                 gridContainer.innerHTML = `
                     <!-- FOTO 1: RICCARDO 2008 -->
                     <div class="image-container" style="padding: 6px;">
-                        <img src="Riccardo_2008.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008">
+                        <img src="riccardo_2004.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008">
                         <div class="caption" style="margin-top: 8px;">
-                            <strong>riccardo.jpg</strong>
+                            <strong>File_0.jpg</strong>
                             <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2008</p>
                         </div>
                     </div>
@@ -934,8 +934,8 @@
                     <div class="image-container" style="padding: 6px;">
                         <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009">
                         <div class="caption" style="margin-top: 8px;">
-                            <strong>Riccardo_2009.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">Tech_Snapshot</p>
+                            <strong>File_1.jpg</strong>
+                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
                         </div>
                     </div>
                 `;
