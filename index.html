@@ -990,7 +990,9 @@
         function showEasterEggR() {
             alert(
                 "== ⍰ ==\n\n" +
-                "How old did I turn in 2022?\n\n" +
+                "Find the index of the 4th letter (R):\n\n" +
+                "How old did the System Administrator turn in 2022?\n\n" +
+                "Hint: Check the system deployment year in the footer. The result matches the alphabet index."
             );
         }
 
@@ -1002,10 +1004,13 @@
             const lockScreen = document.getElementById('crypto-lock-screen');
             const gridContainer = document.getElementById('secure-photo-grid');
 
-            keyInput = keyInput.trim().toLowerCase();
+            // Sanificazione input pulito
+            const cleanInput = keyInput.trim().toLowerCase();
+            
+            // Impronta SHA-256 target della stringa segreta (invisibile all'utente)
             const targetHash = "1579a6e3112caba1b6031ef7c507f3014d7b0a408fefd1b4d4a2c8c32d2274ff";
 
-            const msgBuffer = new TextEncoder().encode(keyInput);
+            const msgBuffer = new TextEncoder().encode(cleanInput);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
@@ -1017,7 +1022,7 @@
                     <div style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; text-shadow: 0 0 10px #00ff66; letter-spacing: 2px; font-weight: bold;" id="matrix-title">
                         [!] BYPASS SIGNAL DETECTED...
                     </div>
-                    <div id="scramble-text" style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; text-shadow: 0 0 8px #00ff66; margin: 20px 0; letter-spacing: 5px;">
+                    <div id="scramble-text" style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; text-shadow: 0 0 8px #00ff66; margin: 20px 0; letter-spacing: 5px; text-transform: uppercase;">
                         ******
                     </div>
                     <div style="color: #00ff66; font-size: 0.8rem; font-family: Tahoma, sans-serif; letter-spacing: 1px;" id="matrix-sub">
@@ -1025,23 +1030,23 @@
                     </div>
                 `;
 
-                const targetWord = "MADRID";
                 const scrambleElement = document.getElementById('scramble-text');
                 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%.&-_=+*";
                 let iterations = 0;
                 
+                // Ricostruisce dinamicamente la stringa inserita (senza hardcodare testi fissi nel sorgente)
                 const interval = setInterval(() => {
-                    scrambleElement.innerText = targetWord
+                    scrambleElement.innerText = cleanInput
                         .split("")
                         .map((letter, index) => {
                             if (index < iterations) {
-                                return targetWord[index];
+                                return cleanInput[index];
                             }
                             return chars[Math.floor(Math.random() * chars.length)];
                         })
                         .join("");
                     
-                    if (iterations >= targetWord.length) {
+                    if (iterations >= cleanInput.length) {
                         clearInterval(interval);
                         
                         document.getElementById('matrix-title').innerText = "[+] ACCESS GRANTED";
@@ -1098,7 +1103,6 @@
         const sendBtnText = document.getElementById('send-btn-text');
         const mobileSendBtn = document.getElementById('mobile-send-btn');
 
-        // INSERISCI QUI L'URL DEL TUO WORKER CLOUDFLARE
         const CLOUDFLARE_WORKER_URL = "https://riccardo-tg-bridge.rmontanu.workers.dev/";
 
         contactForm.addEventListener('submit', function(e) {
