@@ -7,6 +7,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
+        :root {
+            --bg-dark: #0b0c10;
+            --panel-bg: linear-gradient(180deg, #161a22 0%, #0d1015 100%);
+            --border-color: #353f52;
+            --neon-cyan: #00ffcc;
+            --neon-pink: #ff3366;
+            --xbox-green: #107c10;
+            --ios-bg: radial-gradient(circle, #3e5e7a 0%, #112233 100%);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,19 +26,19 @@
         }
 
         body {
-            background-color: #0b0c10;
+            background-color: var(--bg-dark);
             background-image: 
                 radial-gradient(circle, rgba(255, 51, 102, 0.12) 0%, transparent 80%),
                 linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
                 linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
             background-size: 100% 100%, 100% 4px, 6px 100%;
-            color: #00ffcc;
+            color: var(--neon-cyan);
             overflow-x: hidden;
             padding: 10px;
             min-height: 100vh;
         }
 
-        /* Scanline CRT */
+        /* Scanline CRT Effect */
         body::before {
             content: " ";
             display: block;
@@ -49,9 +59,12 @@
             padding-bottom: 40px;
         }
 
-        /* HEADER STILE SONY PSP (XMB) */
-        header {
+        .full-width {
             grid-column: 1 / -1;
+        }
+
+        /* HEADER SONY PSP (XMB) */
+        header {
             background: rgba(15, 18, 25, 0.85);
             border: 2px solid #2d3748;
             border-radius: 6px;
@@ -65,7 +78,7 @@
 
         .psp-logo {
             font-weight: bold; 
-            color: #ff3366;
+            color: var(--neon-pink);
             font-size: 0.95rem;
             text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
         }
@@ -84,8 +97,8 @@
         }
 
         .psp-item.active, .psp-item:hover {
-            color: #00ffcc;
-            text-shadow: 0 0 8px #00ffcc;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-cyan);
         }
 
         .psp-status {
@@ -95,9 +108,8 @@
             gap: 10px;
         }
 
-        /* XBOX 360 BLADES CONTAINER (Le linguette iconiche) */
+        /* XBOX 360 BLADES NAV */
         .xbox-blades-nav {
-            grid-column: 1 / -1;
             display: flex;
             background: #12151c;
             border: 2px solid #313b4d;
@@ -116,27 +128,27 @@
             border-right: 2px solid #2d3748;
             cursor: pointer;
             text-transform: uppercase;
-            clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%); /* Taglio obliquo stile X360 Blades */
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
             min-width: 120px;
             text-align: center;
         }
 
         .blade.active {
             color: #fff;
-            background: linear-gradient(180deg, #ff3366 0%, #cc0044 100%);
+            background: linear-gradient(180deg, var(--neon-pink) 0%, #cc0044 100%);
             text-shadow: 0 0 5px rgba(255,255,255,0.8);
-            border-right-color: #ff3366;
+            border-right-color: var(--neon-pink);
         }
 
         .blade-xbox-green.active {
-            background: linear-gradient(180deg, #107c10 0%, #0c5a0c 100%);
-            border-right-color: #107c10;
+            background: linear-gradient(180deg, var(--xbox-green) 0%, #0c5a0c 100%);
+            border-right-color: var(--xbox-green);
         }
 
-        /* FINESTRE DI SISTEMA OS */
+        /* OS WINDOWS */
         .window {
-            background: linear-gradient(180deg, #161a22 0%, #0d1015 100%);
-            border: 3px solid #353f52;
+            background: var(--panel-bg);
+            border: 3px solid var(--border-color);
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15);
             overflow: hidden;
@@ -178,7 +190,7 @@
             flex-grow: 1;
         }
 
-        /* LETTORE MP3 / XBOX MEDIA DASH */
+        /* MP3 PLAYER */
         .mp3-player {
             display: flex;
             flex-direction: column;
@@ -254,12 +266,147 @@
 
         .mp3-btn:active {
             background: #0d1015;
-            border-color: #ff3366;
-            color: #ff3366;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
             transform: translateY(1px);
         }
 
-        /* GALLERIA IMMAGINI Y2K */
+        /* IPHONE 4 SIMULATOR CENTERED CLASS */
+        .iphone-wrapper {
+            background: #0d0e12;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .iphone-chassis {
+            width: 290px;
+            height: 530px;
+            background: #000000;
+            border-radius: 40px;
+            border: 4px solid #7a7a7a;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 45px 15px;
+        }
+
+        .iphone-speaker {
+            position: absolute;
+            top: 22px;
+            width: 45px;
+            height: 6px;
+            background: #222;
+            border-radius: 3px;
+            border: 1px solid #444;
+        }
+
+        .iphone-camera-lens {
+            position: absolute;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            background: #111;
+            border-radius: 50%;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 370px;
+            background: #000;
+            border: 3px solid #111;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            font-family: -apple-system, Helvetica, Arial, sans-serif;
+        }
+
+        .ios-statusbar {
+            background: linear-gradient(180deg, #7c7c7c 0%, #4c4c4c 50%, #1e1e1e 51%, #111111 100%);
+            height: 20px;
+            padding: 0 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: #fff;
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+            width: 100%;
+        }
+
+        .ios-call-screen {
+            flex-grow: 1;
+            background: var(--ios-bg);
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px, 30px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 15px;
+        }
+
+        .ios-btn-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .ios-btn {
+            width: 90%;
+            padding: 12px 0;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: Helvetica, sans-serif;
+            cursor: pointer;
+            text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.45);
+            letter-spacing: 0.5px;
+        }
+
+        .ios-btn-green {
+            border: 1px solid #145c14;
+            background: linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%);
+        }
+
+        .ios-btn-red {
+            border: 1px solid #580c0c;
+            background: linear-gradient(180deg, #e04040 0%, #b01010 50%, #800000 51%, #a00000 100%);
+        }
+
+        .iphone-home-button {
+            position: absolute;
+            bottom: 10px;
+            width: 42px;
+            height: 42px;
+            background: #111;
+            border-radius: 50%;
+            border: 2px solid #2d2d2d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .iphone-home-square {
+            width: 12px;
+            height: 12px;
+            border: 1.5px solid #666;
+            border-radius: 3px;
+        }
+
+        /* IMAGE GALLERIES */
         .image-container {
             border: 1px solid #2d3748;
             background: #000;
@@ -283,16 +430,6 @@
             transition: filter 0.3s;
         }
 
-        /* Foto 2 Ruotata di 90 gradi in senso antiorario */
-        .rotated-img {
-            transform: rotate(-90deg);
-            transform-origin: center;
-            max-height: 250px;
-            width: auto;
-            aspect-ratio: auto;
-            margin: 30px 0; /* Spazio per evitare sovrapposizioni post-rotazione */
-        }
-
         .heart-img {
             aspect-ratio: 1 / 1;
         }
@@ -310,7 +447,104 @@
             width: 100%;
         }
 
-        /* CONSOLE LOG PERSONALIZZATO (RICCARDO_OS) */
+        .explorer-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 15px;
+        }
+
+        /* OUTLOOK EXPRESS WINDOW (XP STYLE) */
+        .window-xp-header {
+            background: linear-gradient(90deg, #166aee 0%, #0053e1 100%);
+        }
+
+        .xp-toolbar {
+            background: #ece9d8; 
+            padding: 5px 10px; 
+            border-bottom: 1px solid #d6d3c2; 
+            display: flex; 
+            gap: 15px; 
+            align-items: center;
+        }
+
+        .xp-send-btn {
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 2px;
+        }
+
+        .xp-body {
+            background: #ffffff; 
+            color: #000000; 
+            padding: 15px; 
+            position: relative;
+        }
+
+        .xp-alert {
+            display: none; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: 280px; 
+            background: #ece9d8; 
+            border: 3px solid #0053e1; 
+            border-radius: 4px; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5); 
+            z-index: 100; 
+            font-family: Tahoma, sans-serif; 
+            padding: 2px;
+        }
+
+        .xp-alert-header {
+            background: linear-gradient(90deg, #166aee 0%, #0053e1 100%); 
+            color: #fff; 
+            font-weight: bold; 
+            font-size: 0.75rem; 
+            padding: 4px 8px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .xp-alert-btn {
+            background: #ece9d8; 
+            border: 1px solid #716f64; 
+            padding: 4px 15px; 
+            font-size: 0.75rem; 
+            box-shadow: inset -1px -1px 1px #888, inset 1px 1px 1px #fff; 
+            cursor: pointer; 
+            outline: none;
+        }
+
+        .xp-form-row {
+            display: flex; 
+            align-items: center; 
+            border-bottom: 1px solid #e0dfdb; 
+            padding-bottom: 8px;
+        }
+
+        .xp-label {
+            width: 80px; 
+            font-size: 0.8rem; 
+            color: #716f64; 
+            font-weight: bold;
+        }
+
+        .xp-input {
+            flex-grow: 1; 
+            border: none; 
+            outline: none; 
+            font-size: 0.85rem; 
+            padding: 2px 5px; 
+            background: transparent;
+        }
+
+        /* SYSTEM LOGS & TEXT */
         .sys-log {
             font-size: 0.75rem;
             color: #9f7aea;
@@ -326,44 +560,18 @@
         }
 
         .glow-text {
-            color: #ff3366;
+            color: var(--neon-pink);
             text-shadow: 0 0 8px rgba(255, 51, 102, 0.6);
         }
 
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            body {
-                padding: 8px;
-            }
-
-            .desktop {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            header {
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-                padding: 10px;
-            }
-
-            .psp-menu {
-                justify-content: center;
-                width: 100%;
-            }
-
-            .psp-item {
-                font-size: 0.75rem;
-            }
-
-            .psp-status {
-                font-size: 0.7rem;
-            }
-
-            .rotated-img {
-                max-height: 200px;
-            }
+            body { padding: 8px; }
+            .desktop { grid-template-columns: 1fr; gap: 12px; }
+            header { flex-direction: column; gap: 8px; text-align: center; padding: 10px; }
+            .psp-menu { justify-content: center; width: 100%; }
+            .psp-item { font-size: 0.75rem; }
+            .psp-status { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -372,7 +580,7 @@
     <div class="desktop">
 
         <!-- HEADER STILE PSP (XMB) -->
-        <header>
+        <header class="full-width">
             <div class="psp-logo">★ // [RICCARDO]</div>
             <ul class="psp-menu">
                 <li class="psp-item active">■ HOME</li>
@@ -387,13 +595,13 @@
         </header>
 
         <!-- XBOX 360 BLADES DASHBOARD NAV -->
-        <div class="xbox-blades-nav">
+        <div class="xbox-blades-nav full-width">
             <div class="blade active">Live</div>
             <div class="blade blade-xbox-green">Riccardo</div>
             <div class="blade">Media</div>
         </div>
 
-        <!-- WINDOW 1: IL LETTORE MP3 / MEDIA PLAYER -->
+        <!-- WINDOW 1: LETTORE MP3 / MEDIA PLAYER -->
         <div class="window">
             <div class="window-header">
                 <span>360_Media_Center.xex</span>
@@ -426,7 +634,7 @@
             </div>
         </div>
 
-        <!-- WINDOW: IPHONE 4 CALL SIMULATOR (JESSE PINKMAN VOICEMAIL) -->
+        <!-- WINDOW 2: IPHONE 4 CALL SIMULATOR -->
         <div class="window">
             <div class="window-header">
                 <span>iPhone_4_Physical_Simulator.app</span>
@@ -436,67 +644,41 @@
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body" style="background: #0d0e12; padding: 20px 10px; display: flex; justify-content: center; align-items: center;">
-                
-                <!-- SCOCCA ESTERNA IPHONE 4 -->
-                <div style="width: 290px; height: 530px; background: #000000; border-radius: 40px; border: 4px solid #7a7a7a; box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.2); position: relative; display: flex; flex-direction: column; align-items: center; padding: 45px 15px; box-sizing: border-box;">
-                    
-                    <!-- Dettagli hardware in alto (Altoparlante e Sensore) -->
-                    <div style="position: absolute; top: 22px; width: 45px; height: 6px; background: #222; border-radius: 3px; border: 1px solid #444;"></div>
-                    <div style="position: absolute; top: 12px; width: 8px; height: 8px; background: #111; border-radius: 50%;"></div>
+            <div class="window-body iphone-wrapper">
+                <div class="iphone-chassis">
+                    <div class="iphone-speaker"></div>
+                    <div class="iphone-camera-lens"></div>
 
-                    <!-- SCHERMO DEL TELEFONO -->
-                    <div style="width: 100%; height: 370px; background: #000; border: 3px solid #111; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; position: relative; font-family: -apple-system, Helvetica, Arial, sans-serif; box-sizing: border-box;">
-                        
-                        <!-- Barra di Stato iOS 4 -->
-                        <div style="background: linear-gradient(180deg, #7c7c7c 0%, #4c4c4c 50%, #1e1e1e 51%, #111111 100%); height: 20px; padding: 0 8px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #fff; font-weight: bold; border-bottom: 1px solid #000; box-sizing: border-box; width: 100%;">
+                    <div class="iphone-screen">
+                        <div class="ios-statusbar">
                             <span>AT&T 3G</span>
                             <span>4:20 PM</span>
                             <span>🔋 100%</span>
                         </div>
 
-                        <!-- Schermata di Chiamata (Sfondo gocce d'acqua) -->
-                        <div style="flex-grow: 1; background: radial-gradient(circle, #3e5e7a 0%, #112233 100%); background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.1) 1.5px, transparent 1.5px); background-size: 20px 20px, 30px 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 25px 15px; box-sizing: border-box;">
-                            
-                            <!-- Area Testo Contatto -->
+                        <div class="ios-call-screen">
                             <div style="text-align: center;">
                                 <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Jesse Pinkman</h2>
                                 <div id="call-status" style="font-size: 13px; color: #d1e2f2; font-weight: 300; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
                             </div>
 
-                            <!-- ELEMENTO AUDIO INVISIBILE -->
                             <audio id="jesse-audio" src="jesse.mp3" preload="auto"></audio>
 
-                            <!-- CONTAINER DEI DUE PULSANTI (START & END CALL) -->
-                            <div style="width: 100%; display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 10px;">
-                                
-                                <!-- PULSANTE VERDE: START CALL (PLAY) -->
-                                <button onclick="toggleJesseAudio()" id="jesse-play-btn" style="width: 90%; padding: 12px 0; border-radius: 8px; border: 1px solid #145c14; background: linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%); color: #fff; font-size: 15px; font-weight: bold; font-family: Helvetica, sans-serif; cursor: pointer; text-shadow: 0 -1px 1px rgba(0,0,0,0.6); box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.45); transition: filter 0.1s; letter-spacing: 0.5px;">
-                                    Start Call
-                                </button>
-
-                                <!-- PULSANTE ROSSO: END CALL (STOP) -->
-                                <button onclick="stopJesseAudio()" style="width: 90%; padding: 12px 0; border-radius: 8px; border: 1px solid #580c0c; background: linear-gradient(180deg, #e04040 0%, #b01010 50%, #800000 51%, #a00000 100%); color: #fff; font-size: 15px; font-weight: bold; font-family: Helvetica, sans-serif; cursor: pointer; text-shadow: 0 -1px 1px rgba(0,0,0,0.6); box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.45); transition: filter 0.1s; letter-spacing: 0.5px;">
-                                    End Call
-                                </button>
-                                
+                            <div class="ios-btn-container">
+                                <button onclick="handleJesseAudio('toggle')" id="jesse-play-btn" class="ios-btn ios-btn-green">Start Call</button>
+                                <button onclick="handleJesseAudio('stop')" class="ios-btn ios-btn-red">End Call</button>
                             </div>
-
                         </div>
                     </div>
 
-                    <!-- TASTO HOME FISICO DELL'IPHONE 4 -->
-                    <div style="position: absolute; bottom: 10px; width: 42px; height: 42px; background: #111; border-radius: 50%; border: 2px solid #2d2d2d; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);">
-                        <!-- Il quadratino classico stampato sul tasto Home di iOS -->
-                        <div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div>
+                    <div class="iphone-home-button">
+                        <div class="iphone-home-square"></div>
                     </div>
-
                 </div>
-
             </div>
         </div>
 
-        <!-- WINDOW 2: FILE SYSTEM & CONSOLE LOG -->
+        <!-- WINDOW 3: FILE SYSTEM & CONSOLE LOG -->
         <div class="window">
             <div class="window-header">
                 <span>system_log.txt</span>
@@ -520,7 +702,7 @@
             </div>
         </div>
 
-        <!-- WINDOW 3: NUOVA FOTO 1 (b32682...) -->
+        <!-- WINDOW 4: ARCHIVE PHOTO 1 -->
         <div class="window">
             <div class="window-header">
                 <span>ye_performance_archive.png</span>
@@ -538,7 +720,7 @@
             </div>
         </div>
 
-       <!-- WINDOW 4: NUOVA FOTO 2 (RUOTATA ANTICLOCKWISE) -->
+        <!-- WINDOW 5: ROTATED PORTRAIT -->
         <div class="window">
             <div class="window-header">
                 <span>rotated_polaroid.png</span>
@@ -549,9 +731,7 @@
                 </div>
             </div>
             <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 300px; background: #050505;">
-                <!-- Wrapper per gestire la rotazione senza rompere il layout -->
                 <div class="image-container" style="border: none; background: transparent; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center; overflow: visible;">
-                    <!-- L'immagine viene ruotata e scalata per riempire il box -->
                     <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
                          style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.3); border-radius: 4px; transition: filter 0.3s;" 
                          alt="Rotated Portrait">
@@ -560,7 +740,7 @@
             </div>
         </div>
 
-        <!-- WINDOW 6: NUOVO BOX DEDICATO A KANYE / YEEZY -->
+        <!-- WINDOW 6: KANYE / YEEZY BOX -->
         <div class="window">
             <div class="window-header">
                 <span>yeezy_sound_generator_concept.png</span>
@@ -575,17 +755,16 @@
                     <img src="https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png" class="y2k-img" alt="Kanye West Jeen-Yuhs">
                     <div class="caption">
                         <strong>YEEZY_PROTOTYPE_v0.808</strong>
-                        <p style="margin-top: 5px; font-size: 0.72rem; color: #00ffcc; text-transform: uppercase;">
+                        <p style="margin-top: 5px; font-size: 0.72rem; color: var(--neon-cyan); text-transform: uppercase;">
                             Engineered by Ye. Coldest Winter frequencies detected. Auto-Tune architecture initialized.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-       <!-- WINDOW 5: CARTELLA DI RECOVERY MULTIMEDIALE (FOTO PERSONALI) -->
-        <div class="window" style="grid-column: 1 / -1;">
+        <!-- WINDOW 7: BACKUP FOTO ARTIFACTS -->
+        <div class="window full-width">
             <div class="window-header">
                 <span>D:\Backup\Riccardo_Archive_Photos\</span>
                 <div class="window-controls">
@@ -595,57 +774,46 @@
                 </div>
             </div>
             <div class="window-body" style="background: #11141a;">
-                
-                <!-- Sottotitolo stile Explorer -->
                 <div style="font-size: 0.75rem; color: #a0aec0; border-bottom: 1px solid #232a37; padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase;">
                     📂 Directory: 2 Files Found // System Recovery
                 </div>
 
-                <!-- Griglia interna per affiancare le due foto -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                    
-                    <!-- FOTO 1: RICCARDO 2004 (Formato 1:1 Quadrato) -->
-                    <div class="image-container" style="background: #000; border: 1px solid #2d3748; padding: 6px;">
-                        <img src="riccardo_2004.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover;" alt="Riccardo 2004" onerror="this.style.display='none';">
+                <div class="explorer-grid">
+                    <!-- FOTO 1: RICCARDO 2004 -->
+                    <div class="image-container" style="padding: 6px;">
+                        <img src="riccardo_2004.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2004" onerror="this.style.display='none';">
                         <div class="caption" style="margin-top: 8px;">
                             <strong>riccardo.jpg</strong>
-                            <p style="font-size: 0.65rem; color: #ff3366; margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
+                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
                         </div>
                     </div>
 
-                    <!-- FOTO 2: R1 (Formato 16:9 Widescreen) -->
-                    <div class="image-container" style="background: #000; border: 1px solid #2d3748; padding: 6px;">
-                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;" alt="Riccardo r1" onerror="this.style.display='none';">
+                    <!-- FOTO 2: R1 -->
+                    <div class="image-container" style="padding: 6px;">
+                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo r1" onerror="this.style.display='none';">
                         <div class="caption" style="margin-top: 8px;">
                             <strong>2009.jpg</strong>
-                            <p style="font-size: 0.65rem; color: #00ffcc; margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
+                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
                         </div>
                     </div>
-
                 </div>
 
-                <!-- Nota informativa finale di sistema -->
                 <div style="margin-top: 15px; font-size: 0.7rem; color: #718096; text-align: center; border-top: 1px dashed rgba(255, 51, 102, 0.2); padding-top: 10px;">
                     [!] Analog memories mounted successfully. Files are locked in the database.
                 </div>
-
             </div>
         </div>
 
-        
-
-
-
-<!-- TITOLO INTRODUTTIVO OUTLOOK (XP STYLE) -->
-        <div style="grid-column: 1 / -1; margin-top: 25px; margin-bottom: 5px; padding-left: 5px;">
-            <p style="font-family: 'Share Tech Mono', monospace; color: #ff3366; font-size: 0.9rem; text-shadow: 0 0 5px rgba(255, 51, 102, 0.4); letter-spacing: 1px;">
-                &gt;&gt; SYS_REQUEST: <span style="color: #00ffcc; text-decoration: underline;">WRITE_ME_SOMETHING...</span>
+        <!-- REQUEST TITLE -->
+        <div class="full-width" style="margin-top: 25px; margin-bottom: 5px; padding-left: 5px;">
+            <p style="color: var(--neon-pink); font-size: 0.9rem; text-shadow: 0 0 5px rgba(255, 51, 102, 0.4); letter-spacing: 1px;">
+                &gt;&gt; SYS_REQUEST: <span style="color: var(--neon-cyan); text-decoration: underline;">WRITE_ME_SOMETHING...</span>
             </p>
         </div>
     
-<!-- WINDOW 7: OUTLOOK EXPRESS EMAIL BOX (WINDOWS XP STYLE) -->
-        <div class="window" style="grid-column: 1 / -1; margin-top: 15px;">
-            <div class="window-header" style="background: linear-gradient(90deg, #166aee 0%, #0053e1 100%);">
+        <!-- WINDOW 8: OUTLOOK EXPRESS EMAIL BOX -->
+        <div class="window full-width" style="margin-top: 15px;">
+            <div class="window-header window-xp-header">
                 <span>Outlook_Express_v6.0 - [New Message to Riccardo]</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
@@ -654,9 +822,8 @@
                 </div>
             </div>
             
-            <!-- Barra Strumenti stile Outlook XP -->
-            <div style="background: #ece9d8; padding: 5px 10px; border-bottom: 1px solid #d6d3c2; display: flex; gap: 15px; align-items: center;">
-                <button type="submit" form="xp-contact-form" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;">
+            <div class="xp-toolbar">
+                <button type="submit" form="xp-contact-form" class="xp-send-btn">
                     <span style="font-size: 1.2rem;">✉</span>
                     <span id="send-btn-text" style="font-size: 0.7rem; color: #000; font-family: Tahoma, sans-serif; font-weight: bold;">Send</span>
                 </button>
@@ -664,59 +831,51 @@
                 <div style="font-size: 0.75rem; color: #555; font-family: Tahoma, sans-serif;">To: riccardo_sys_admin@808s.net</div>
             </div>
 
-            <div class="window-body" style="background: #ffffff; color: #000000; padding: 15px; position: relative;">
-                
-                <!-- POP-UP DI CONFERMA INVIO (Invisibile di default, stile Windows XP Alert) -->
-                <div id="xp-alert-box" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; background: #ece9d8; border: 3px solid #0053e1; border-radius: 4px; box-shadow: 5px 5px 15px rgba(0,0,0,0.5); z-index: 100; font-family: Tahoma, sans-serif; padding: 2px;">
-                    <div style="background: linear-gradient(90deg, #166aee 0%, #0053e1 100%); color: #fff; font-weight: bold; font-size: 0.75rem; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="window-body xp-body">
+                <!-- POP-UP DI CONFERMA INVIO (XP Style Alert) -->
+                <div id="xp-alert-box" class="xp-alert">
+                    <div class="xp-alert-header">
                         <span>System Message</span>
                         <span style="cursor: pointer; font-weight: bold;" onclick="closeXpAlert()">X</span>
                     </div>
-                    <div style="padding: 15px; background: #fff; font-size: 0.8rem; color: #000; display: flex; align-items: center; gap: 10px;">
+                    <div style="padding: 15px; background: #fff; font-size: 0.8rem; color: #000; display: flex; align-items: center; gap: 10px; font-family: Tahoma, sans-serif;">
                         <span style="font-size: 1.8rem; color: #0053e1;">ℹ</span>
                         <span>Your analog message has been transmitted successfully!</span>
                     </div>
                     <div style="background: #ece9d8; padding: 8px; display: flex; justify-content: flex-end; border-top: 1px solid #d6d3c2;">
-                        <button onclick="closeXpAlert()" style="background: #ece9d8; border: 1px solid #716f64; padding: 4px 15px; font-size: 0.75rem; box-shadow: inset -1px -1px 1px #888, inset 1px 1px 1px #fff; cursor: pointer; outline: none;">OK</button>
+                        <button onclick="closeXpAlert()" class="xp-alert-btn">OK</button>
                     </div>
                 </div>
 
                 <!-- FORM DI CONTATTO -->
                 <form id="xp-contact-form" action="https://formspree.io/f/mpqvqvdk" method="POST" style="display: flex; flex-direction: column; gap: 12px; font-family: Tahoma, sans-serif;">
-                    
-                    <!-- Campo Nome (Opzionale) -->
-                    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
-                        <label for="user-name" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">From:</label>
-                        <input type="text" id="user-name" placeholder="Anonymous Sender" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent;">
+                    <div class="xp-form-row">
+                        <label for="user-name" class="xp-label">From:</label>
+                        <input type="text" id="user-name" placeholder="Anonymous Sender" class="xp-input">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Campo Email (Opzionale) -->
-                    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
-                        <label for="user-email" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Email:</label>
-                        <input type="email" id="user-email" placeholder="your_email@domain.com" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                    <div class="xp-form-row">
+                        <label for="user-email" class="xp-label">Email:</label>
+                        <input type="email" id="user-email" placeholder="your_email@domain.com" class="xp-input" style="color: #000;">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Campo Oggetto (Opzionale) -->
-                    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
-                        <label for="user-subject" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Subject:</label>
-                        <input type="text" id="user-subject" placeholder="808s_Feedback_System" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                    <div class="xp-form-row">
+                        <label for="user-subject" class="xp-label">Subject:</label>
+                        <input type="text" id="user-subject" placeholder="808s_Feedback_System" class="xp-input" style="color: #000;">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Area di Testo Messaggio -->
                     <div style="margin-top: 10px;">
                         <textarea id="user-message" required placeholder="Type your analog message here..." style="width: 100%; min-height: 120px; border: 1px solid #b5b2a1; padding: 10px; font-size: 0.9rem; outline: none; resize: vertical; font-family: 'Share Tech Mono', monospace; background-color: #fafafa; color: #111;"></textarea>
                     </div>
 
-                    <!-- CAMPI NASCOSTI STANDARD (Quelli inviati a Formspree) -->
                     <input type="hidden" name="name" id="fs-static-name" value="RICCARDO_OS_USER">
                     <input type="hidden" name="email" id="fs-static-email" value="noreply@riccardophys.github.io">
                     <input type="hidden" name="_subject" id="fs-static-subject" value="[RICCARDO_OS] New Form Submission">
                     <input type="hidden" name="message" id="fs-final-message">
 
-                    <!-- Bottone per Mobile -->
                     <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
                         <button type="submit" id="mobile-send-btn" style="background: linear-gradient(180deg, #0053e1 0%, #003db8 100%); color: white; border: 1px solid #002c9a; padding: 6px 20px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
                             Send Message
@@ -726,39 +885,42 @@
             </div>
         </div>
 
-       <!-- SCRIPT DI INVIO MODULO ASINCRONO CON METADI -->
-        <script>
-            const contactForm = document.getElementById('xp-contact-form');
-            const alertBox = document.getElementById('xp-alert-box');
-            const sendBtnText = document.getElementById('send-btn-text');
-            const mobileSendBtn = document.getElementById('mobile-send-btn');
+        <!-- FOOTER -->
+        <footer class="full-width" style="margin-top: 25px; padding: 20px 10px; text-align: center; border-top: 1px dashed rgba(0, 255, 204, 0.2); font-size: 0.75rem; color: #8899a6; display: flex; flex-direction: column; gap: 8px;">
+            <div>© '04 <strong>RICCARDO_SYS_ADMIN</strong>. ALL RIGHTS RESERVED.</div>
+            <div style="font-size: 0.7rem; color: #4a5568; letter-spacing: 1px;">
+                greetings from RICCARDO // SYSTEM OPERATIVE: Windows_XP v1.2 // TR-808 EMULATION CHIP ACTIVE
+            </div>
+            <div style="font-size: 0.65rem; color: #ff3366;">
+                [!] WARNING: Unauthorized access to 808s frequencies will trigger emotional output errors.
+            </div>
+        </footer>
+    </div>
 
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+    <!-- SCRIPT UNIFICATO E OTTIMIZZATO -->
+    <script>
+        // FORM SUBMISSION & METADATA LOGIC
+        const contactForm = document.getElementById('xp-contact-form');
+        const alertBox = document.getElementById('xp-alert-box');
+        const sendBtnText = document.getElementById('send-btn-text');
+        const mobileSendBtn = document.getElementById('mobile-send-btn');
 
-                sendBtnText.textContent = "Sending...";
-                mobileSendBtn.textContent = "Sending...";
-                mobileSendBtn.disabled = true;
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-                // 1. Recuperiamo i dati inseriti manualmente dall'utente
-                const uName = document.getElementById('user-name').value.trim() || "Anonymous";
-                const uEmail = document.getElementById('user-email').value.trim() || "Not Provided";
-                const uSubject = document.getElementById('user-subject').value.trim() || "No Subject";
-                const uMessage = document.getElementById('user-message').value;
+            sendBtnText.textContent = "Sending...";
+            mobileSendBtn.textContent = "Sending...";
+            mobileSendBtn.disabled = true;
 
-                // 2. DATI DI SISTEMA 
-                const userAgent = navigator.userAgent; // Browser e OS
-                const screenResolution = `${window.screen.width}x${window.screen.height}`; // Risoluzione Schermo
-                const windowSize = `${window.innerWidth}x${window.innerHeight}`; // Dimensione Finestra Browser
-                const userLanguage = navigator.language || navigator.userLanguage; // Lingua del sistema
-                const userDateTime = new Date().toLocaleString(); // Data e ora locale dell'utente
-                const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Fuso orario (es. Europe/Rome)
+            const uName = document.getElementById('user-name').value.trim() || "Anonymous";
+            const uEmail = document.getElementById('user-email').value.trim() || "Not Provided";
+            const uSubject = document.getElementById('user-subject').value.trim() || "No Subject";
+            const uMessage = document.getElementById('user-message').value;
 
-                // 3. Creiamo il super-messaggio unificato con i metadati 
-                const formattedMessage = `====================================
+            const formattedMessage = `====================================
 [RICCARDO_OS - INCOMING TRANSMISSION]
 ====================================
-SENDER:  ${uName}
+SENDER:   ${uName}
 EMAIL:   ${uEmail}
 SUBJECT: ${uSubject}
 ------------------------------------
@@ -768,96 +930,84 @@ ${uMessage}
 ====================================
 [VISITOR_METADATA - SYSTEM_LOG]
 ====================================
-TIMESTAMP:   ${userDateTime}
-TIMEZONE:    ${userTimezone}
-OS/BROWSER:  ${userAgent}
-SCREEN_RES:  ${screenResolution} (Window: ${windowSize})
-LANG:        ${userLanguage}
+TIMESTAMP:   ${new Date().toLocaleString()}
+TIMEZONE:    ${Intl.DateTimeFormat().resolvedOptions().timeZone}
+OS/BROWSER:  ${navigator.userAgent}
+SCREEN_RES:  ${window.screen.width}x${window.screen.height} (Window: ${window.innerWidth}x${window.innerHeight})
+LANG:        ${navigator.language || navigator.userLanguage}
 ====================================`;
 
-                // Inseriamo il messaggio formattato nel campo nascosto per Formspree
-                document.getElementById('fs-final-message').value = formattedMessage;
+            document.getElementById('fs-final-message').value = formattedMessage;
 
-                const formData = new FormData(contactForm);
-
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alertBox.style.display = 'block';
-                        contactForm.reset();
-                    } else {
-                        alert("System Error: Could not deliver message to Riccardo.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert("Network Connection Lost. Try again.");
-                })
-                .finally(() => {
-                    sendBtnText.textContent = "Send";
-                    mobileSendBtn.textContent = "Send Message";
-                    mobileSendBtn.disabled = false;
-                });
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alertBox.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    alert("System Error: Could not deliver message to Riccardo.");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Network Connection Lost. Try again.");
+            })
+            .finally(() => {
+                sendBtnText.textContent = "Send";
+                mobileSendBtn.textContent = "Send Message";
+                mobileSendBtn.disabled = false;
             });
+        });
 
-            function closeXpAlert() {
-                alertBox.style.display = 'none';
-            }
-        </script>
+        function closeXpAlert() {
+            alertBox.style.display = 'none';
+        }
 
-
-   <!-- LOGICA IPHONE 4 SIMULATOR -->
-    <script>
+        // IPHONE 4 SIMULATOR LOGIC (Optimized)
         const jesseAudio = document.getElementById('jesse-audio');
         const callStatus = document.getElementById('call-status');
         const jessePlayBtn = document.getElementById('jesse-play-btn');
 
-        function toggleJesseAudio() {
-            if (jesseAudio.paused) {
-                jesseAudio.play()
+        function handleJesseAudio(action) {
+            if (action === 'toggle') {
+                if (jesseAudio.paused) {
+                    jesseAudio.play()
                     .then(() => {
-                        callStatus.textContent = "00:01";
                         jessePlayBtn.textContent = "Pause Call";
-                        // Cambia lo stile del pulsante in arancione/giallo "Hold" durante la pausa
                         jessePlayBtn.style.background = "linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%)";
                         jessePlayBtn.style.borderColor = "#145c14";
                     })
                     .catch(err => {
-                        console.log("Errore audio Jesse:", err);
+                        console.log("Audio error:", err);
                         alert("Assicurati di aver caricato il file 'jesse.mp3' nella root di GitHub!");
                     });
-            } else {
+                } else {
+                    jesseAudio.pause();
+                    callStatus.textContent = "call on hold";
+                    jessePlayBtn.textContent = "Resume Call";
+                    jessePlayBtn.style.background = "linear-gradient(180deg, #f2a134 0%, #d67a10 50%, #9e5100 51%, #b86200 100%)";
+                    jessePlayBtn.style.borderColor = "#6e3a00";
+                }
+            } else if (action === 'stop') {
                 jesseAudio.pause();
-                callStatus.textContent = "call on hold";
-                jessePlayBtn.textContent = "Resume Call";
-                // Coloriamo di arancione/giallo quando la chiamata è "in attesa"
-                jessePlayBtn.style.background = "linear-gradient(180deg, #f2a134 0%, #d67a10 50%, #9e5100 51%, #b86200 100%)";
-                jessePlayBtn.style.borderColor = "#6e3a00";
+                jesseAudio.currentTime = 0;
+                callStatus.textContent = "call ended";
+                jessePlayBtn.textContent = "Start Call";
+                jessePlayBtn.style.background = "linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%)";
+                jessePlayBtn.style.borderColor = "#145c14";
+                
+                setTimeout(() => {
+                    if (jesseAudio.paused && jesseAudio.currentTime === 0) {
+                        callStatus.textContent = "calling...";
+                    }
+                }, 2000);
             }
         }
 
-        function stopJesseAudio() {
-            jesseAudio.pause();
-            jesseAudio.currentTime = 0;
-            callStatus.textContent = "call ended";
-            jessePlayBtn.textContent = "Start Call";
-            jessePlayBtn.style.background = "linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%)";
-            jessePlayBtn.style.borderColor = "#145c14";
-            
-            setTimeout(() => {
-                if (jesseAudio.paused && jesseAudio.currentTime === 0) {
-                    callStatus.textContent = "calling...";
-                }
-            }, 2000);
-        }
-
-        // Timer di chiamata dinamico
         jesseAudio.addEventListener('timeupdate', () => {
             if (!jesseAudio.paused) {
                 const minutes = Math.floor(jesseAudio.currentTime / 60).toString().padStart(2, '0');
@@ -866,11 +1016,7 @@ LANG:        ${userLanguage}
             }
         });
 
-        // Quando finisce la segreteria, riaggancia
-        jesseAudio.addEventListener('ended', () => {
-            stopJesseAudio();
-        });
+        jesseAudio.addEventListener('ended', () => handleJesseAudio('stop'));
     </script>
-    
 </body>
 </html>
