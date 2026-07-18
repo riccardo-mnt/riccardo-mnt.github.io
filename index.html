@@ -1015,16 +1015,17 @@
                             statusLabel.style.color = "var(--xbox-green)";
                             lockScreen.style.display = 'none';
 
+                            // CORREZIONE: Aggiunto posizionamento relativo e z-index elevato sui tag <img> per bypassare la grana CRT
                             gridContainer.innerHTML = `
                                 <div class="image-container" style="padding: 6px;">
-                                    <img src="Riccardo_2009.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009">
+                                    <img src="Riccardo_2009.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
                                     <div class="caption" style="margin-top: 8px;">
                                         <strong>File_0.jpg</strong>
                                         <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
                                     </div>
                                 </div>
                                 <div class="image-container" style="padding: 6px;">
-                                    <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009">
+                                    <img src="r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
                                     <div class="caption" style="margin-top: 8px;">
                                         <strong>File_1.jpg</strong>
                                         <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
@@ -1041,13 +1042,6 @@
                 document.getElementById('crypto-key').value = '';
             }
         }
-
-        document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
-        document.getElementById('crypto-key').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                checkCryptoKey();
-            }
-        });
 
         // FORM SUBMISSION ENGINE
         const contactForm = document.getElementById('xp-contact-form');
