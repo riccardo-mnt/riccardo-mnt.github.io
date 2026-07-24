@@ -27,17 +27,38 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle, rgba(255, 51, 102, 0.12) 0%, transparent 80%),
-                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
-            background-size: 100% 100%, 100% 4px, 6px 100%;
-            color: var(--neon-cyan);
-            overflow-x: hidden;
-            padding: 10px;
-            min-height: 100vh;
-        }
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle, rgba(255, 51, 102, 0.12) 0%, transparent 80%),
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+    background-size: 100% 100%, 100% 4px, 6px 100%;
+    color: var(--neon-cyan);
+    overflow-x: hidden;
+    padding: 10px;
+    min-height: 100vh;
+
+    /* REGOLA ANTI-CURSOR LAMPEGGIANTE: Disabilita la selezione del testo di default */
+    -webkit-user-select: none; /* Safari / Chrome */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE / Edge */
+    user-select: none;         /* Standard */
+    cursor: default;           /* Forza il cursore freccia anziché quello da testo */
+}
+
+/* Riabilita la digitazione e il cursore solo dove serve veramente */
+input, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+    cursor: text !important;
+}
+
+/* Per i pulsanti e i link mantiene il cursore della manina */
+button, a, .blade, .psp-logo, .win-btn {
+    cursor: pointer;
+}
 
         /* Scanline CRT Effect */
         body::before {
