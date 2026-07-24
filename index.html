@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>808s // R</title>
@@ -168,9 +169,8 @@
             border-bottom: none;
             cursor: pointer;
             text-transform: uppercase;
-            text-decoration: none; /* Rimuove il sottolineato dei link */
+            text-decoration: none;
             display: inline-block;
-            /* Curve morbide hardware stile iPod/early-Apple */
             border-radius: 12px 12px 0 0; 
             min-width: 110px;
             text-align: center;
@@ -612,7 +612,7 @@
             <a href="privacy.html" class="blade">Privacy</a>
         </div>
 
-        <!-- WINDOW 1: LETTORE MP3 (iPod Classic / 360 Hybrid Edition) -->
+        <!-- WINDOW 1: LETTORE MP3 -->
         <div class="window">
             <div class="window-header">
                 <span>360_Media_Center.xex</span>
@@ -623,44 +623,28 @@
                 </div>
             </div>
             <div class="window-body" style="background: #151821; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; min-height: 530px;">
-                
-                <!-- Chassi Hardware del Player -->
                 <div style="width: 280px; background: linear-gradient(135deg, #1e2330 0%, #0f1117 100%); border: 3px solid #2d3748; border-radius: 24px; padding: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 1px 3px rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; gap: 20px;">
-                    
-                    <!-- Schermo LCD iPod Style Avanzato -->
                     <div class="lcd-screen" style="width: 100%; height: 190px; margin-bottom: 0; background-color: #050d0a; border: 2px solid #1a2421; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
                         <div class="track-info" style="font-size: 0.7rem; letter-spacing: 0.5px;">
                             <span style="color: #00ffaa; font-weight: bold;">TRACK: 01_Say_You_Will</span>
                             <span style="color: #4a5568;">96 kbps</span>
                         </div>
-
-                        <!-- GIF perfettamente squadrata integrata come Album Art -->
                         <div style="width: 95px; height: 90px; background: #000; border: 1px solid #142824; margin: 5px auto; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
                             <img src="https://c.tenor.com/p2w1siLrDksAAAAC/tenor.gif" style="width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated;" alt="Heart Waveform">
                         </div>
-
                         <div class="track-info" style="font-size: 0.7rem; border-top: 1px dashed rgba(0,255,102,0.15); padding-top: 4px;">
                             <span class="glow-text" style="color: var(--neon-pink); font-weight: bold; text-shadow: 0 0 5px var(--neon-pink);">PLAYING</span>
                             <span style="color: #00ff66;">[02:14 / 06:17]</span>
                         </div>
                     </div>
-
-                    <!-- Apple iPod Touch Ring (Click Wheel) con Easter Egg -->
                     <div style="position: relative; width: 150px; height: 150px; background: linear-gradient(180deg, #f7f9fa 0%, #e2e8f0 100%); border-radius: 50%; border: 1px solid #cbd5e0; box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 2px 5px #fff, inset 0 -2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; user-select: none; margin-top: 5px;">
-                        
-                        <!-- Tasto MENU con l'indovinello per la lettera A -->
                         <div onclick="showEasterEggA()" style="position: absolute; top: 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.7rem; font-weight: 700; color: #718096; cursor: pointer; letter-spacing: 0.5px;">MENU</div>
-                        
                         <div onclick="alert('Who ordered that?')" style="position: absolute; bottom: 12px; font-size: 0.75rem; color: #718096; cursor: pointer; transform: scaleY(0.9);">▶||</div>
                         <div onclick="alert('do you like 𝐀𝐬𝐭𝐫☻𝐖꩜𝐫𝐥𝐝?')" style="position: absolute; right: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">&gt;&gt;|</div>
                         <div onclick="alert('Ciaoooo')" style="position: absolute; left: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">|&lt;&lt;</div>
-
-                        <!-- Pulsante Centrale -->
                         <button onclick="alert('TRACK SELECTED // v0.808')" style="width: 50px; height: 50px; background: linear-gradient(180deg, #edf2f7 0%, #cbd5e1 100%); border: 1px solid #bec8d5; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.15), inset 0 1px 0 #fff; cursor: pointer; outline: none; transition: transform 0.05s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'"></button>
                     </div>
-
                 </div>
-
             </div>
         </div>
 
@@ -696,7 +680,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Tasto Home con Easter Egg M -->
                     <div onclick="showEasterEggM()" class="iphone-home-button" style="cursor: pointer;"><div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div></div>
                 </div>
             </div>
@@ -714,9 +697,7 @@
             </div>
             <div class="window-body" style="padding: 12px;">
                 <div class="image-container" style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
-                    <img src="img/rodeo.jpg" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" 
-                         alt="Rodeo Session Thumbnail">
+                    <img src="img/rodeo.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Rodeo Session Thumbnail">
                 </div>
                 <div class="caption" style="margin-top: 5px;">ID: RODEO // HOSTED BY: CACTUS JACK RECORDS ©</div>
             </div>
@@ -752,9 +733,7 @@
             </div>
             <div class="window-body" style="padding: 12px;">
                 <div class="image-container" style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
-                    <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
-                         style="position: absolute; width: 56.25%; height: 177.77%; object-fit: cover; transform: rotate(-90deg); border-radius: 4px; flex-shrink: 0;" 
-                         alt="Rotated Portrait">
+                    <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" style="position: absolute; width: 56.25%; height: 177.77%; object-fit: cover; transform: rotate(-90deg); border-radius: 4px; flex-shrink: 0;" alt="Rotated Portrait">
                 </div>
                 <div class="caption" style="margin-top: 5px;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
             </div>
@@ -775,9 +754,7 @@
                     <img src="https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png" class="y2k-img" alt="Kanye West Jeen-Yuhs">
                     <div class="caption">
                         <strong>ID: YEEZY_PROTOTYPE_v0.808</strong>
-                        <p style="margin-top: 5px; font-size: 0.72rem; color: var(--neon-cyan); text-transform: uppercase;">
-                            Engineered by Ye.
-                        </p>
+                        <p style="margin-top: 5px; font-size: 0.72rem; color: var(--neon-cyan); text-transform: uppercase;">Engineered by Ye.</p>
                     </div>
                 </div>
             </div>
@@ -841,13 +818,13 @@
             </div>
         </div>
 
-        <!-- REQUEST TITLE - Easter Egg R (18) -->
+        <!-- REQUEST TITLE -->
         <div class="full-width" style="margin-top: 25px; margin-bottom: 5px; padding-left: 5px;">
             <p style="color: var(--neon-pink); font-size: 0.9rem; text-shadow: 0 0 5px rgba(255, 51, 102, 0.4); letter-spacing: 1px;">
                 &gt;&gt; SYS_REQUEST: <span onclick="showEasterEggR()" style="color: var(--neon-cyan); text-decoration: underline; cursor: pointer;">WRITE_ME_SOMETHING...</span>
             </p>
         </div>
-    
+
         <!-- WINDOW 8: OUTLOOK EXPRESS EMAIL BOX -->
         <div class="window full-width" style="margin-top: 15px;">
             <div class="window-header window-xp-header">
@@ -979,7 +956,6 @@
         glitchTarget.addEventListener('mouseenter', triggerGlitch);
         glitchTarget.addEventListener('click', triggerGlitch);
 
-
         // EASTER EGGS
         function showEasterEggA() {
             alert(
@@ -1003,7 +979,25 @@
             );
         }
 
-        // SECURE RETRO CRYPTO DECRYPTION SYSTEM WITH MATRIX DECODE EFFECT
+        // HELPER PER SCARICARE E DECRIPTARE I FILE CON LA CHIAVE INSERITA
+        async function decryptAndGetUrl(fileUrl, rawPassword) {
+            const key = rawPassword.trim().toLowerCase();
+            
+            const res = await fetch(fileUrl);
+            if (!res.ok) throw new Error(`File non trovato: ${fileUrl}`);
+            const cipherText = await res.text();
+            
+            const bytes = CryptoJS.AES.decrypt(cipherText, key);
+            const decryptedBase64 = bytes.toString(CryptoJS.enc.Utf8);
+            
+            if (!decryptedBase64) {
+                throw new Error("Chiave non valida");
+            }
+            
+            return `data:image/jpeg;base64,${decryptedBase64}`;
+        }
+
+        // FUNZIONE DI GESTIONE INTERFACCIA E SBLOCCO
         async function checkCryptoKey() {
             let keyInput = document.getElementById('crypto-key').value;
             const errorMsg = document.getElementById('crypto-error');
@@ -1011,89 +1005,91 @@
             const lockScreen = document.getElementById('crypto-lock-screen');
             const gridContainer = document.getElementById('secure-photo-grid');
 
-            // Sanificazione input pulito
             const cleanInput = keyInput.trim().toLowerCase();
             
-            // Impronta SHA-256 target della stringa segreta (invisibile all'utente)
-            const targetHash = "1579a6e3112caba1b6031ef7c507f3014d7b0a408fefd1b4d4a2c8c32d2274ff";
+            if (!cleanInput) {
+                errorMsg.style.display = 'block';
+                return;
+            }
 
-            const msgBuffer = new TextEncoder().encode(cleanInput);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-            if (inputHash === targetHash) {
-                errorMsg.style.display = 'none';
-                
-                lockScreen.innerHTML = `
-                    <div style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; text-shadow: 0 0 10px #00ff66; letter-spacing: 2px; font-weight: bold;" id="matrix-title">
-                        [!] BYPASS SIGNAL DETECTED...
-                    </div>
-                    <div id="scramble-text" style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; text-shadow: 0 0 8px #00ff66; margin: 20px 0; letter-spacing: 5px; text-transform: uppercase;">
-                        ******
-                    </div>
-                    <div style="color: #00ff66; font-size: 0.8rem; font-family: Tahoma, sans-serif; letter-spacing: 1px;" id="matrix-sub">
-                        DECRYPTING CYPHER STACK...
-                    </div>
-                `;
-
-                const scrambleElement = document.getElementById('scramble-text');
-                const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%.&-_=+*";
-                let iterations = 0;
-                
-                // Ricostruisce dinamicamente la stringa inserita (senza hardcodare testi fissi nel sorgente)
-                const interval = setInterval(() => {
-                    scrambleElement.innerText = cleanInput
-                        .split("")
-                        .map((letter, index) => {
-                            if (index < iterations) {
-                                return cleanInput[index];
-                            }
-                            return chars[Math.floor(Math.random() * chars.length)];
-                        })
-                        .join("");
-                    
-                    if (iterations >= cleanInput.length) {
-                        clearInterval(interval);
-                        
-                        document.getElementById('matrix-title').innerText = "[+] ACCESS GRANTED";
-                        document.getElementById('matrix-title').style.color = "var(--neon-cyan)";
-                        document.getElementById('matrix-title').style.textShadow = "0 0 10px var(--neon-cyan)";
-                        scrambleElement.style.color = "var(--neon-cyan)";
-                        scrambleElement.style.textShadow = "0 0 12px var(--neon-cyan)";
-                        document.getElementById('matrix-sub').innerText = "KEY ACCEPTED // MOUNTING FILES...";
-                        document.getElementById('matrix-sub').style.color = "var(--neon-cyan)";
-
-                        setTimeout(() => {
-                            statusLabel.textContent = "MOUNTED / UNLOCKED";
-                            statusLabel.style.color = "var(--xbox-green)";
-                            lockScreen.style.display = 'none';
-
-                            gridContainer.innerHTML = `
-                                <div class="image-container" style="padding: 6px;">
-                                    <img src="img/Riccardo_2009.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
-                                    <div class="caption" style="margin-top: 8px;">
-                                        <strong>File_0.jpg</strong>
-                                        <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
-                                    </div>
-                                </div>
-                                <div class="image-container" style="padding: 6px;">
-                                    <img src="img/r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
-                                    <div class="caption" style="margin-top: 8px;">
-                                        <strong>File_1.jpg</strong>
-                                        <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
-                                    </div>
-                                </div>
-                            `;
-                        }, 1200);
-                    }
-                    iterations += 1 / 3; 
-                }, 40);
-
-            } else {
+            let url1, url2;
+            try {
+                // Tenta la decifratura reale dei file .enc
+                [url1, url2] = await Promise.all([
+                    decryptAndGetUrl('r1.enc', cleanInput),
+                    decryptAndGetUrl('Riccardo_2009.enc', cleanInput)
+                ]);
+            } catch (err) {
                 errorMsg.style.display = 'block';
                 document.getElementById('crypto-key').value = '';
+                return;
             }
+
+            errorMsg.style.display = 'none';
+            
+            lockScreen.innerHTML = `
+                <div style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; text-shadow: 0 0 10px #00ff66; letter-spacing: 2px; font-weight: bold;" id="matrix-title">
+                    [!] BYPASS SIGNAL DETECTED...
+                </div>
+                <div id="scramble-text" style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; text-shadow: 0 0 8px #00ff66; margin: 20px 0; letter-spacing: 5px; text-transform: uppercase;">
+                    ******
+                </div>
+                <div style="color: #00ff66; font-size: 0.8rem; font-family: Tahoma, sans-serif; letter-spacing: 1px;" id="matrix-sub">
+                    DECRYPTING CYPHER STACK...
+                </div>
+            `;
+
+            const scrambleElement = document.getElementById('scramble-text');
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%.&-_=+*";
+            let iterations = 0;
+            
+            const interval = setInterval(() => {
+                scrambleElement.innerText = cleanInput
+                    .split("")
+                    .map((letter, index) => {
+                        if (index < iterations) {
+                            return cleanInput[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+                
+                if (iterations >= cleanInput.length) {
+                    clearInterval(interval);
+                    
+                    document.getElementById('matrix-title').innerText = "[+] ACCESS GRANTED";
+                    document.getElementById('matrix-title').style.color = "var(--neon-cyan)";
+                    document.getElementById('matrix-title').style.textShadow = "0 0 10px var(--neon-cyan)";
+                    scrambleElement.style.color = "var(--neon-cyan)";
+                    scrambleElement.style.textShadow = "0 0 12px var(--neon-cyan)";
+                    document.getElementById('matrix-sub').innerText = "KEY ACCEPTED // MOUNTING FILES...";
+                    document.getElementById('matrix-sub').style.color = "var(--neon-cyan)";
+
+                    setTimeout(() => {
+                        statusLabel.textContent = "MOUNTED / UNLOCKED";
+                        statusLabel.style.color = "var(--xbox-green)";
+                        lockScreen.style.display = 'none';
+
+                        gridContainer.innerHTML = `
+                            <div class="image-container" style="padding: 6px;">
+                                <img src="${url1}" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 1">
+                                <div class="caption" style="margin-top: 8px;">
+                                    <strong>r1.jpg</strong>
+                                    <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Decrypted Payload</p>
+                                </div>
+                            </div>
+                            <div class="image-container" style="padding: 6px;">
+                                <img src="${url2}" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
+                                <div class="caption" style="margin-top: 8px;">
+                                    <strong>Riccardo_2009.jpg</strong>
+                                    <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
+                                </div>
+                            </div>
+                        `;
+                    }, 1200);
+                }
+                iterations += 1 / 3; 
+            }, 40);
         }
 
         // LISTENERS VERIFICA PASSWORD
