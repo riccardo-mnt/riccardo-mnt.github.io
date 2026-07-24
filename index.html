@@ -1016,8 +1016,8 @@
             try {
                 // Tenta la decifratura reale dei file .enc
                 [url1, url2] = await Promise.all([
-                    decryptAndGetUrl('r1.enc', cleanInput),
-                    decryptAndGetUrl('Riccardo_2009.enc', cleanInput)
+                    decryptAndGetUrl('img/r1.enc', cleanInput),
+                    decryptAndGetUrl('img/Riccardo_2009.enc', cleanInput)
                 ]);
             } catch (err) {
                 errorMsg.style.display = 'block';
