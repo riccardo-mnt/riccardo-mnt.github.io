@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>808s // R</title>
+    <!-- Libreria CryptoJS per la decrittazione AES-256 lato client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -168,9 +170,8 @@
             border-bottom: none;
             cursor: pointer;
             text-transform: uppercase;
-            text-decoration: none; /* Rimuove il sottolineato dei link */
+            text-decoration: none;
             display: inline-block;
-            /* Curve morbide hardware stile iPod/early-Apple */
             border-radius: 12px 12px 0 0; 
             min-width: 110px;
             text-align: center;
@@ -648,7 +649,6 @@
                     <!-- Apple iPod Touch Ring (Click Wheel) con Easter Egg -->
                     <div style="position: relative; width: 150px; height: 150px; background: linear-gradient(180deg, #f7f9fa 0%, #e2e8f0 100%); border-radius: 50%; border: 1px solid #cbd5e0; box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 2px 5px #fff, inset 0 -2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; user-select: none; margin-top: 5px;">
                         
-                        <!-- Tasto MENU con l'indovinello per la lettera A -->
                         <div onclick="showEasterEggA()" style="position: absolute; top: 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.7rem; font-weight: 700; color: #718096; cursor: pointer; letter-spacing: 0.5px;">MENU</div>
                         
                         <div onclick="alert('Who ordered that?')" style="position: absolute; bottom: 12px; font-size: 0.75rem; color: #718096; cursor: pointer; transform: scaleY(0.9);">▶||</div>
@@ -696,7 +696,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Tasto Home con Easter Egg M -->
                     <div onclick="showEasterEggM()" class="iphone-home-button" style="cursor: pointer;"><div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div></div>
                 </div>
             </div>
@@ -796,7 +795,7 @@
             <div class="window-body" style="background: #11141a; position: relative;" id="archive-body-container">
                 
                 <div style="font-size: 0.75rem; color: #a0aec0; border-bottom: 1px solid #232a37; padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase;">
-                    📂 Directory: 2 Files Detected // Access: <span id="crypto-status" style="color: var(--neon-pink);">RESTRICTED</span>
+                    📂 Directory: 1 Encrypted Stream Detected // Access: <span id="crypto-status" style="color: var(--neon-pink);">RESTRICTED</span>
                 </div>
 
                 <div class="crypto-frame">
@@ -805,11 +804,7 @@
                     <div class="explorer-grid" id="secure-photo-grid" style="width: 100%; align-self: center;">
                         <div class="image-container" style="padding: 6px;">
                             <div class="y2k-img secure-tile-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
-                            <div class="caption" style="margin-top: 8px;"><strong>riccardo.jpg</strong></div>
-                        </div>
-                        <div class="image-container" style="padding: 6px;">
-                            <div class="y2k-img secure-tile-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
-                            <div class="caption" style="margin-top: 8px;"><strong>2009.jpg</strong></div>
+                            <div class="caption" style="margin-top: 8px;"><strong>Riccardo_2009.enc</strong></div>
                         </div>
                     </div>
 
@@ -836,12 +831,12 @@
                 </div>
 
                 <div style="margin-top: 15px; font-size: 0.7rem; color: #718096; text-align: center; border-top: 1px dashed rgba(255, 51, 102, 0.2); padding-top: 10px;">
-                    [!] Cryptographic protection engine: AES-Retro-808 active.
+                    [!] Cryptographic protection engine: AES-256 Client-Side active.
                 </div>
             </div>
         </div>
 
-        <!-- REQUEST TITLE - Easter Egg R (18) -->
+        <!-- REQUEST TITLE - Easter Egg R -->
         <div class="full-width" style="margin-top: 25px; margin-bottom: 5px; padding-left: 5px;">
             <p style="color: var(--neon-pink); font-size: 0.9rem; text-shadow: 0 0 5px rgba(255, 51, 102, 0.4); letter-spacing: 1px;">
                 &gt;&gt; SYS_REQUEST: <span onclick="showEasterEggR()" style="color: var(--neon-cyan); text-decoration: underline; cursor: pointer;">WRITE_ME_SOMETHING...</span>
@@ -979,7 +974,6 @@
         glitchTarget.addEventListener('mouseenter', triggerGlitch);
         glitchTarget.addEventListener('click', triggerGlitch);
 
-
         // EASTER EGGS
         function showEasterEggA() {
             alert(
@@ -1003,7 +997,7 @@
             );
         }
 
-        // SECURE RETRO CRYPTO DECRYPTION SYSTEM WITH MATRIX DECODE EFFECT
+        // SECURE RETRO CRYPTO DECRYPTION SYSTEM WITH REAL AES DECODE
         async function checkCryptoKey() {
             let keyInput = document.getElementById('crypto-key').value;
             const errorMsg = document.getElementById('crypto-error');
@@ -1011,88 +1005,99 @@
             const lockScreen = document.getElementById('crypto-lock-screen');
             const gridContainer = document.getElementById('secure-photo-grid');
 
-            // Sanificazione input pulito
+            // Sanificazione input (rimuove spazi ed imposta minuscolo)
             const cleanInput = keyInput.trim().toLowerCase();
-            
-            // Impronta SHA-256 target della stringa segreta (invisibile all'utente)
-            const targetHash = "1579a6e3112caba1b6031ef7c507f3014d7b0a408fefd1b4d4a2c8c32d2274ff";
 
-            const msgBuffer = new TextEncoder().encode(cleanInput);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-            if (inputHash === targetHash) {
-                errorMsg.style.display = 'none';
-                
-                lockScreen.innerHTML = `
-                    <div style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; text-shadow: 0 0 10px #00ff66; letter-spacing: 2px; font-weight: bold;" id="matrix-title">
-                        [!] BYPASS SIGNAL DETECTED...
-                    </div>
-                    <div id="scramble-text" style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; text-shadow: 0 0 8px #00ff66; margin: 20px 0; letter-spacing: 5px; text-transform: uppercase;">
-                        ******
-                    </div>
-                    <div style="color: #00ff66; font-size: 0.8rem; font-family: Tahoma, sans-serif; letter-spacing: 1px;" id="matrix-sub">
-                        DECRYPTING CYPHER STACK...
-                    </div>
-                `;
-
-                const scrambleElement = document.getElementById('scramble-text');
-                const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%.&-_=+*";
-                let iterations = 0;
-                
-                // Ricostruisce dinamicamente la stringa inserita (senza hardcodare testi fissi nel sorgente)
-                const interval = setInterval(() => {
-                    scrambleElement.innerText = cleanInput
-                        .split("")
-                        .map((letter, index) => {
-                            if (index < iterations) {
-                                return cleanInput[index];
-                            }
-                            return chars[Math.floor(Math.random() * chars.length)];
-                        })
-                        .join("");
-                    
-                    if (iterations >= cleanInput.length) {
-                        clearInterval(interval);
-                        
-                        document.getElementById('matrix-title').innerText = "[+] ACCESS GRANTED";
-                        document.getElementById('matrix-title').style.color = "var(--neon-cyan)";
-                        document.getElementById('matrix-title').style.textShadow = "0 0 10px var(--neon-cyan)";
-                        scrambleElement.style.color = "var(--neon-cyan)";
-                        scrambleElement.style.textShadow = "0 0 12px var(--neon-cyan)";
-                        document.getElementById('matrix-sub').innerText = "KEY ACCEPTED // MOUNTING FILES...";
-                        document.getElementById('matrix-sub').style.color = "var(--neon-cyan)";
-
-                        setTimeout(() => {
-                            statusLabel.textContent = "MOUNTED / UNLOCKED";
-                            statusLabel.style.color = "var(--xbox-green)";
-                            lockScreen.style.display = 'none';
-
-                            gridContainer.innerHTML = `
-                                <div class="image-container" style="padding: 6px;">
-                                    <img src="img/Riccardo_2009.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
-                                    <div class="caption" style="margin-top: 8px;">
-                                        <strong>File_0.jpg</strong>
-                                        <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
-                                    </div>
-                                </div>
-                                <div class="image-container" style="padding: 6px;">
-                                    <img src="img/r1.jpg" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
-                                    <div class="caption" style="margin-top: 8px;">
-                                        <strong>File_1.jpg</strong>
-                                        <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">Year: 2009</p>
-                                    </div>
-                                </div>
-                            `;
-                        }, 1200);
-                    }
-                    iterations += 1 / 3; 
-                }, 40);
-
-            } else {
+            if (!cleanInput) {
                 errorMsg.style.display = 'block';
-                document.getElementById('crypto-key').value = '';
+                return;
+            }
+
+            errorMsg.style.display = 'none';
+            lockScreen.innerHTML = `
+                <div style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; text-shadow: 0 0 10px #00ff66; letter-spacing: 2px; font-weight: bold;" id="matrix-title">
+                    [!] FETCHING ENCRYPTED DATA...
+                </div>
+                <div id="scramble-text" style="color: #00ff66; font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; text-shadow: 0 0 8px #00ff66; margin: 20px 0; letter-spacing: 5px; text-transform: uppercase;">
+                    ******
+                </div>
+                <div style="color: #00ff66; font-size: 0.8rem; font-family: Tahoma, sans-serif; letter-spacing: 1px;" id="matrix-sub">
+                    DECRYPTING CYPHER STACK (AES-256)...
+                </div>
+            `;
+
+            const scrambleElement = document.getElementById('scramble-text');
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%.&-_=+*";
+            let iterations = 0;
+
+            const interval = setInterval(() => {
+                scrambleElement.innerText = cleanInput
+                    .split("")
+                    .map((letter, index) => {
+                        if (index < iterations) return cleanInput[index];
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+                iterations += 1 / 3;
+            }, 40);
+
+            try {
+                // Scarica il file .enc caricato nella radice del repository GitHub
+                const response = await fetch('./Riccardo_2009.enc');
+                if (!response.ok) {
+                    throw new Error("File .enc non trovato sul server");
+                }
+                const encryptedText = await response.text();
+
+                // Decrittazione AES via CryptoJS
+                const bytes = CryptoJS.AES.decrypt(encryptedText.trim(), cleanInput);
+                const originalBase64 = bytes.toString(CryptoJS.enc.Utf8);
+
+                // Verifica validità della decrittazione
+                if (!originalBase64 || originalBase64.length < 100) {
+                    clearInterval(interval);
+                    errorMsg.innerText = "[-] ACCESS DENIED: INVALID KEY STRING";
+                    errorMsg.style.display = 'block';
+                    
+                    // Ripristina form
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                    return;
+                }
+
+                clearInterval(interval);
+                scrambleElement.innerText = cleanInput;
+                document.getElementById('matrix-title').innerText = "[+] ACCESS GRANTED";
+                document.getElementById('matrix-title').style.color = "var(--neon-cyan)";
+                document.getElementById('matrix-title').style.textShadow = "0 0 10px var(--neon-cyan)";
+                scrambleElement.style.color = "var(--neon-cyan)";
+                scrambleElement.style.textShadow = "0 0 12px var(--neon-cyan)";
+                document.getElementById('matrix-sub').innerText = "KEY ACCEPTED // MOUNTING IMAGE DATA...";
+                document.getElementById('matrix-sub').style.color = "var(--neon-cyan)";
+
+                setTimeout(() => {
+                    statusLabel.textContent = "MOUNTED / UNLOCKED";
+                    statusLabel.style.color = "var(--xbox-green)";
+                    lockScreen.style.display = 'none';
+
+                    // Mostra l'immagine ricavata in RAM
+                    gridContainer.innerHTML = `
+                        <div class="image-container" style="padding: 6px;">
+                            <img src="data:image/jpeg;base64,${originalBase64}" class="y2k-img secure-tile-img" style="width: 100%; height: auto; object-fit: cover; position: relative; z-index: 10000;" alt="Riccardo 2009">
+                            <div class="caption" style="margin-top: 8px;">
+                                <strong>Riccardo_2009.enc</strong>
+                                <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">STATUS: UNLOCKED // Year: 2009</p>
+                            </div>
+                        </div>
+                    `;
+                }, 1000);
+
+            } catch (err) {
+                clearInterval(interval);
+                console.error(err);
+                alert("[-] ERROR: Could not locate or decrypt Riccardo_2009.enc");
+                location.reload();
             }
         }
 
